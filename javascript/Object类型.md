@@ -50,6 +50,7 @@ user.education = 'Undergraduate';
 ```
 
 ## 计算属性
+#计算属性
 
 可以通过计算属性来实现，对象的属性名从变量中动态确定。
 
@@ -192,6 +193,7 @@ for(let key in user) {
 ```
 
 ## 对象的克隆与合并（浅复制）
+#浅拷贝
 
 对于一个对象变量，它存储的并不是”对象的值“，而是一个对值的”引用“（内存地址）。 因此，**拷贝类变量或者将其作为函数参数传递时，所拷贝的是引用，而不是对象本身**。
 
@@ -322,6 +324,7 @@ console.log(user2);
 ```
 
 ## 深拷贝
+#深拷贝 #lodash
 
 可以 使用 `lodash` 库的 `_.cloneDeep(obj)`  来实现 ”深拷贝“：
 
@@ -358,6 +361,7 @@ let user = {
 ```
 
 ## this
+#this
 
 ### 方法中的 ”this“
 
@@ -393,6 +397,7 @@ obj2.b(); // Jack , 此时的this指向obj2
 
 
 ## 箭头函数
+#箭头函数
 
 箭头函数没有自己的 `this` ，在箭头函数内部访问的 `this` 都是从外部获取的。
 
@@ -424,6 +429,7 @@ user.say();
 ```
 
 ## 构造函数
+#构造函数 #new
 
 构造函数 也是常规函数，只是对于它有 2 个共同的约定：
 1. 以大写字母开头
@@ -479,6 +485,29 @@ User(); // 没有使用 new 来执行
 ```
 
 ## 可选链  "?."
+#可选链 #polyfills
 
 可选链 `?.` 是一种访问嵌套对象属性的安全方式。它是最近才添加到 javascript 中的特性，旧式浏览器可能需要 `polyfills` 。
-- 如果 *可选链* `?.` 前面的值为 `undef`
+- 如果 *可选链* `?.` 前面的值为 `undefined` 或者 `null` ， 它会停止运算并返回 `undefined` 。
+- *可选链* `?.` 是针对其前面的值成为可选值，对其后面的值不起作用。
+- *可选链* `?.`  可以用来安全地读取或者删除，但不能用于写入。
+
+*可选链* `?.` 语法的3种形式：
+- `obj?.prop`  -- 如果 `obj` 存在则返回 `obj.prop` ， 否则返回 `undefined`
+- `obj?.[prop]`  --  如果 `obj` 存在则返回 `obj[prop]`， 否则返回 `undefined`
+- `obj.method?.()`  --  如果 `obj.method` 存在则调用 `obj.method()`， 否则返回 `undefined`
+
+```js {.line-numbers}
+const user = {};
+// 如果 address存在，则返回 user.address.street，否则返回 undefined
+let street = user.address?.street;
+
+let a = 0;
+user?.say(a++); // 如果 没有user，则say()和a++不会执行
+
+user.say?.(); // 如果 user.say存在，则调用，返回啥都不会发生
+
+user?.['name']; // 如果 user中存在 name ，则返回 user['name']，否则 返回 undefined
+
+```
+
