@@ -49,6 +49,43 @@ console.log(user[id]);
 
 let user2 = {
 	name: 'Tom',
-	[id]: 'abc' // 
+	[id]: 'abc' // 在字面量的对象中使用时，需要使用 计算属性 方式
 }
 ```
+
+## Symbol 在 for...in 中会被跳过
+
+`Symbol`属性不会参与到 `for...in` 循环中。 
+
+```js {.line-numbers}
+let id = Symbol('id');
+let user = {
+	name: 'Tom',
+	age: 18,
+	[id]: 'abc'
+};
+
+for(let key in user) {
+	console.log(key); // name, age ,不会输出symbol
+}
+
+let keys = Object.keys(user); // Object.keys()会也忽略掉Symbol
+console.log(keys); // ['name', 'age']
+```
+
+<font color="red">注意：</font>，[Object.assign](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)会同时复制字符串和 symbol 属性：
+
+```js {.line-numbers}
+let id = Symbol('id');
+const user = {
+	[id]: 'abc'
+};
+
+const cloneUser = Object.assign({}, user);
+
+console.log(cloneUser[id]); // abc
+```
+
+## 全局 Symbol
+
+在通常情况下，所有的symbol都是不同的，即使它们有相同的名字。 如果想要让名字相同的Symbol 具有相同的实体， 则需要 使用 <font color="red">全局 Symbol 注册表</font> 来实现。
