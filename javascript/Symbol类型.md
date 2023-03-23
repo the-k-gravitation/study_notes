@@ -73,7 +73,7 @@ let keys = Object.keys(user); // Object.keys()会也忽略掉Symbol
 console.log(keys); // ['name', 'age']
 ```
 
-<font color="red">注意：</font>，[Object.assign](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)会同时复制字符串和 symbol 属性：
+<font color="red">注意：</font>[Object.assign](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)会同时复制字符串和 symbol 属性：
 
 ```js {.line-numbers}
 let id = Symbol('id');
@@ -88,4 +88,14 @@ console.log(cloneUser[id]); // abc
 
 ## 全局 Symbol
 
-在通常情况下，所有的symbol都是不同的，即使它们有相同的名字。 如果想要让名字相同的Symbol 具有相同的实体， 则需要 使用 <font color="red">全局 Symbol 注册表</font> 来实现。
+在通常情况下，所有的symbol都是不同的，即使它们有相同的名字。 
+如果想要让名字相同的Symbol 具有相同的实体， 则需要 使用 <font color="red">全局 Symbol 注册表</font> 来实现。 它可以确保访问相同描述名字的Symbol时，返回的都是同一个Symbol。
+使用 `Symbol.for(key)` 从<font color="red">全局 Symbol 注册表</font> 中读取或者创建(不存在时，就会创建) Symbol。
+
+```js {.line-numbers}
+const id = Symbol.for('id'); //  全局 Symbol 注册表中不存在 此 symbol对象，此时就会创建一个新的
+
+const id2 = Symbol.for('id'); // 由于已经在 全局 Symbol 注册表 中已经存在了描述名字为“id”的 symbol，就会将其读取出来
+
+console.log(id == id2); // true
+```
