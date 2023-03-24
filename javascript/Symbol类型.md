@@ -105,5 +105,8 @@ console.log(id == id2); // true
 let s1 = Symbol.for('symbol1');
 
 console.log(Symbol.keyFor(s1)); // symbol1
+
+//直接通过 description就可以获取到标签名字：
+console.log(s1.description);
 ```
 
