@@ -511,3 +511,64 @@ user?.['name']; // 如果 user中存在 name ，则返回 user['name']，否则 
 
 ```
 
+## 原始值转换
+
+通过实现一些方法，可以将对象转换成原始值。
+
+类型转换在各种情况下有三种变体。它们被称为 `“hint”`。它们分别是：`"string"`, `"number"`, `"default"`。
+
+javascript 中提供了3个用于进行转换的方法：
+1. 调用 `obj[Symbol.toPrimitivel](hint)` 如果这个方法存在的话。
+2. 否则，对于 `"string"` hint：调用 `toString` 方法，如果它不存在，则调用 `valueOf` 方法（因此，对于字符串转换，优先调用 `toString`）。
+3. 否则，对于其他 hint：调用 `valueOf` 方法，如果它不存在，则调用 `toString` 方法（因此，对于数学运算，优先调用 `valueOf` 方法）。
+
+```js {.line-numbers}
+const user = {
+	name: 'Tom',
+	age: 18,
+
+	[Symbol.toPrimitive](hint) {
+		return hint === 'string' ? `{name: "${this.name}"}` : this.age;
+	}
+}
+
+alert(user); // hint: string --> {name: "Tom"}
+
+/*
+{
+	"name": "Tom",
+	"age": 18
+}
+*/
+console.log(user);
+
+console.log(+user); // hint: number --> 18
+console.log(user + 20); // hint: default --> 20
+```
+
+```js {.line-numbers}
+const user = {
+	name: 'Tom',
+	age: 18,
+
+	[Symbol.toPrimitive](hint) {
+		return hint === 'string' ? `{name: "${this.name}"}` : this.age;
+	}
+
+	toString() {
+	}
+}
+
+alert(user); // hint: string --> {name: "Tom"}
+
+/*
+{
+	"name": "Tom",
+	"age": 18
+}
+*/
+console.log(user);
+
+console.log(+user); // hint: number --> 18
+console.log(user + 20); // hint: default --> 20
+```
