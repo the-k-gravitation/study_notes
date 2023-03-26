@@ -271,4 +271,70 @@ console.log(parseInt('10110', 2)); // 22
 console.log(parseInt('2n3cr', 36)); // 4436667
 ```
 
-## 
+## 解题
+
+### 从 min 到 max 的随机数
+
+内建函数 `Math.random()` 会创建一个在 `0` 到 `1` 之间（不包括 `1`）的随机数。
+
+编写一个 `random(min, max)` 函数，用以生成一个在 `min` 到 `max` 之间的随机浮点数（不包括 `max`)）。
+
+需要将区间 0…1 中的所有值“映射”为范围在 `min` 到 `max` 中的值。
+分两个阶段完成：
+1. 如果我们将 0…1 的随机数乘以 `max-min`，则随机数的范围将从 0…1 增加到 `0..max-min`。
+2. 现在，如果我们将随机数与 `min` 相加，则随机数的范围将为 `min` 到 `max`。
+3. 
+```js {.line-numbers}
+function random(min, max) { 
+	return min + Math.random() * (max - min); 
+}
+```
+
+### 从 min 到 max 的随机整数
+#解题
+
+创建一个函数 `randomInteger(min, max)`，该函数会生成一个范围在 `min` 到 `max` 中的随机整数，包括 `min` 和 `max`。
+在 `min..max` 范围中的所有数字的出现概率必须相同。
+
+#### 错误的解决方案
+
+最简单但错误的解决方案是生成一个范围在 `min` 到 `max` 的值，并取对其进行四舍五入后的值：
+
+```js {.line-numbers}
+// 但不正确。获得边缘值 `min` 和 `max` 的概率比其他值低两倍。
+function randomInteger(min, max) {
+	let rand = min + Math.random() * (max - min); 
+	return Math.round(rand); 
+}
+
+randomInteger(1, 3);
+// 发生这种情况是因为 `Math.round()` 从范围 `1..3` 中获得随机数，并按如下所示进行四舍五入：
+/*
+values from 1 ... 1.4999999999 ---> 1    （0.5）
+values from 1.5 ... 2.4999999999 ---> 2    （1）
+values from 2.5 ... 2.9999999999 ---> 3   (0.5)
+*/
+```
+
+#### 正确的解决方案
+
+有很多正确的解决方案。其中之一是调整取值范围的边界。为了确保相同的取值范围，我们可以生成从 0.5 到 3.5 的值，从而将所需的概率添加到取值范围的边界：
+
+```js {.line-numbers}
+function randomInteger(min, max) { 
+	// 现在范围是从 (min-0.5) 到 (max+0.5) 
+	let rand = min - 0.5 + Math.random() * (max - min + 1); 
+	return Math.round(rand); 
+}
+```
+
+另一种方法是使用 `Math.floor` 来取范围从 `min` 到 `max+1` 的随机数：
+
+```js {.line-numbers}
+function randomInteger(min, max) { 
+	// here rand is from min to (max+1) 
+	let rand = min + Math.random() * (max + 1 - min); 
+	return Math.floor(rand); 
+}
+```
+
