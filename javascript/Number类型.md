@@ -51,7 +51,7 @@ console.log(NaN === NaN); // false
 
 在 `javascript` 中做数学运算是安全的。脚本永远不会因为一个致命的数学运算而停止，最坏的情况，会得到 `NaN` 的结果。
 
-### 十六进制、二进制和八进制
+## 十六进制、二进制和八进制
 
 javascript 可以直接坚持 十六进制、二进制和八进制数字的编写：
 
@@ -68,7 +68,7 @@ console.log(b === c); // true
 
 对于其他进制，可以使用 `parseInt()` 函数。
 
-### toString(base)
+## toString(base)
 
 `number.toString(base)` 用于返回 `number` 给定的 `base` 进制数字 的字符串。
 
@@ -88,7 +88,7 @@ let n = (12345664554).toString(36); // 注意使用两个点
 // 当直接将数字使用toString()时，可以使用上面 两种方式。
 ```
 
-### 舍入
+## 舍入
 
 - Math.floor()
 
@@ -134,7 +134,21 @@ n = Number(n.toFixed(2));
 
 `Math.round` 和 `toFixed` 都将数字舍入到最接近的数字：`0..4` 会被舍去，而 `5..9` 会进一位。
 
-### 不精确的计算
+还可以使用 `toFixed()`来检查一个数字的精度损失情况：
+
+```js {.line-numbers}
+console.log((6.35).toFixed(20)); // 6.34999999999999964473
+// 所以 6.35 保留一位小数位时，会得到 6.3,而不是6.4
+console.log((6.35).toFixed(1)); // 6.3
+
+
+console.log((1.35).toFixed(20)); // 1.35000000000000008882
+// 1.35 保留一位小数位时，会得到 1.4
+console.log((1.35).toFixed(1)); // 1.4
+
+```
+
+## 不精确的计算
 
 javascript 在内部，数字是以 64 位格式 [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754) 表示的，所以正好有 `64` 位可以存储一个数字：其中 `52` 位被用于存储这些数字，其中 `11` 位用于存储小数点的位置，而 `1` 位用于符号。
 
@@ -147,7 +161,7 @@ let sum = 0.1 + 0.2;  // 0.30000000000000004
 sum = +sum.toFixed(2);
 ```
 
-### isNaN(value) 与 isFinite(value)
+## isNaN(value) 与 isFinite(value)
 
 `isNaN(value)` 用来测试 `value` 是否为 `NaN`： 
 
@@ -161,6 +175,8 @@ console.log(isNaN('abc')); // true
 
 ```js {.line-numbers}
 console.log(isFinite('10')); // true
+console.log(isFinite('')); // true
+console.log(isFinite(null)); // true
 console.log(isFinite('abc')); // false
 console.log(isFinite(Infinity)); // false
 console.log(isFinite(NaN)); // false
@@ -175,7 +191,7 @@ n = isFinite(n);
 
 <font color="red">所有的数字函数， 都将 空字符串 或仅有 空格的字符串 视为 0</font> 。
 
-### ===  与 Object.is
+## ===  与 Object.is
 
 除了以下两种情况下， `===` 与 `Object.is` 完全一样： 
 1. `Object.is(NaN , NaN) === true`
@@ -184,7 +200,7 @@ n = isFinite(n);
 当内部算法需要比较两个值是否完全相同时，它使用 `Object.is`（内部称为 [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)）。
 
 
-### 数字型转换
+## 数字型转换
 
 可以调用`Number(value)`来将`value`转换为 number 类型。
 
@@ -229,7 +245,7 @@ console.log(+'10px'); // NaN
 | true 和 false | 1 和 0                                                                                                                                                                                   |
 | string        | 去掉首尾空白字符（空格、换行符 \n、制表符 \t 等）后的纯数字字符串中含有的数字。如果剩余字符串为空，则转换结果为 0。否则，将会从剩余字符串中“读取”数字。当类型转换出现 error 时返回 NaN。 |
 
-### parseInt 和 parseFloat
+## parseInt 和 parseFloat
 
 `parseInt()`  与 `parseFloat()` 用来从一个字符串中提取一个有效的数字。
 函数 `parseInt` 返回一个整数，而 `parseFloat` 返回一个浮点数：
@@ -254,3 +270,5 @@ console.log(parseInt('abcc', 16)); // 43980
 console.log(parseInt('10110', 2)); // 22
 console.log(parseInt('2n3cr', 36)); // 4436667
 ```
+
+## 
