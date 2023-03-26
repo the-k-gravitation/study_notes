@@ -1,4 +1,5 @@
-#javascript 
+#javascript
+
 ## script 标签
 
 可以使用 &lt;script&gt; 标签将 javascript 程序插入到 html 文档中的任何位置。当浏览器遇到 &lt;script&gt; 标签时，代码会自动运行。

@@ -1,4 +1,4 @@
-#javascript  #datatype #object
+#javascript #datatype #object
 
 `object` 类型用于储存数据集合和更为复杂的数据实体。
 通过带有可选 **属性列表** 的 **花括号{...}** 来创建对象。 一个属性就是一个键值对（key:value），其中键 key 是一个字符串（属性名），值 value 可以是任何值。
@@ -50,6 +50,7 @@ user.education = 'Undergraduate';
 ```
 
 ## 计算属性
+
 #计算属性
 
 可以通过计算属性来实现，对象的属性名从变量中动态确定。
@@ -75,11 +76,11 @@ let bag = {
 
 ```js {.line-numbers}
 function getUser(name, password) {
-	return {
-		name, // 跟 name: name 一样的效果
-		password,
-		//...
-	}
+  return {
+    name, // 跟 name: name 一样的效果
+    password,
+    //...
+  };
 }
 ```
 
@@ -87,8 +88,8 @@ function getUser(name, password) {
 
 ```js {.line-numbers}
 let user = {
-	name, // 跟 name: name 一样的效果
-	age: 18
+  name, // 跟 name: name 一样的效果
+  age: 18,
 };
 ```
 
@@ -96,6 +97,7 @@ let user = {
 
 对象的属性名可以使用语言保留的关键字。
 用其他类型作为属性名时，会自动转换为字符串：
+
 ```js {.line-numbers}
 let obj = {
 	12: 'Number'
@@ -108,14 +110,15 @@ console.log(obj.12); // 这样不行，会报错
 
 ## 属性存在性判断
 
-### 操作符 “in” 
+### 操作符 “in”
 
-在javascript中，对象中可以访问任何属性，即使属性不存在也不会报错，读取的属性不存在时，会得到 `undefined` 。
+在 javascript 中，对象中可以访问任何属性，即使属性不存在也不会报错，读取的属性不存在时，会得到 `undefined` 。
 
-判断某个属性是否存在于对象中： 
+判断某个属性是否存在于对象中：
+
 ```js {.line-numbers}
 let user = {
-	name: 'Tom'
+  name: 'Tom',
 };
 
 // 判断某个属性是否存在于对象中
@@ -129,82 +132,86 @@ console.log(gender in user); // false
 ### "for..in" 循环
 
 遍历一个对象中所有的键(key)：
+
 ```js {.line-numbers}
 let user = {
-	name: 'Tom',
-	age: 18,
-	gender: 'F'
+  name: 'Tom',
+  age: 18,
+  gender: 'F',
 };
 
-
-for(let key in user){
-	console.log(`Key: ${key}, Vaue: ${user[key]}`);
+for (let key in user) {
+  console.log(`Key: ${key}, Vaue: ${user[key]}`);
 }
 ```
 
 ## 属性在对象中的顺序
 
-在javascript中，属性的顺序规则：<font color="red">整数属性会被进行排序（从小到大的次序），其他属性则按照创建时的顺序进行排序</font> 。
-*整数属性*表示把它转换成整数后，再转换回去，还是原来那个样子。  ”49“ 就是整数属性，”+49“ , ”2.1“ 都是非整数属性。
+在 javascript 中，属性的顺序规则：<font color="red">整数属性会被进行排序（从小到大的次序），其他属性则按照创建时的顺序进行排序</font> 。
+*整数属性*表示把它转换成整数后，再转换回去，还是原来那个样子。 ”49“ 就是整数属性，”+49“ , ”2.1“ 都是非整数属性。
 
 - 全是整数属性时，会把属性名的值对应的整数值进行从小到大进行排序：
+
 ```js {.line-numbers}
 let countryCodes = {
-	'49': 'Germany',
-	'86': 'China',
-	//...
-	'1': 'USA'
+  49: 'Germany',
+  86: 'China',
+  //...
+  1: 'USA',
 };
 
-for(let code in countryCodes) {
-	console.log(code);  // 1, 49, 86 从小到大进行排序
+for (let code in countryCodes) {
+  console.log(code); // 1, 49, 86 从小到大进行排序
 }
 ```
 
 - 当为非整数属性时，按照创建时的顺序进行排序：
+
 ```js {.line-numbers}
 let user = {
-	name: 'Tom',
-	gender: 'F'
+  name: 'Tom',
+  gender: 'F',
 };
 user.age = 18;
 
 // 非整数属性按照创建时的顺序进行排序
-for(let key in user){
-	console.log(key); // name, gender, age
+for (let key in user) {
+  console.log(key); // name, gender, age
 }
 ```
 
 - 混合属性时，先排序整数属性，再排序非整数属性：
+
 ```js {.line-numbers}
 let user = {
-	name: 'Tom',
-	'2': 3,
-	gender: 'F',
-	1: 1,
+  name: 'Tom',
+  2: 3,
+  gender: 'F',
+  1: 1,
 };
 
 user.age = 18;
 user['0'] = 0;
 
-for(let key in user) {
-	console.log(key); // 0， 1， 2， name, gender, age
+for (let key in user) {
+  console.log(key); // 0， 1， 2， name, gender, age
 }
 ```
 
 ## 对象的克隆与合并（浅复制）
+
 #浅拷贝
 
 对于一个对象变量，它存储的并不是”对象的值“，而是一个对值的”引用“（内存地址）。 因此，**拷贝类变量或者将其作为函数参数传递时，所拷贝的是引用，而不是对象本身**。
 
 ```js {.line-numbers}
 const user = {
-	name: 'Tom',
-	age: 18,
-	hobbies: ['game', 'football']
+  name: 'Tom',
+  age: 18,
+  hobbies: ['game', 'football'],
 };
 
-console.log(user); 
+console.log(user);
 /*{
     "name": "Tom",
     "age": 18,
@@ -216,8 +223,8 @@ console.log(user);
 
 // 传递的是对象的引用，所以在函数中对对象进行修改时，外面的对象也会同样发生改变
 function changeSomething(user) {
-	user.hobbies.push('basketball');
-	user.age = 28;
+  user.hobbies.push('basketball');
+  user.age = 28;
 }
 
 changeSomething(user);
@@ -234,28 +241,28 @@ console.log(user);
     ]
 }
 */
-
 ```
 
 可以使用 <font color="red">Object.assign()</font> 方法来进行对象的”浅复制“：
-语法：  `Object.assign(dest, [arg1, arg2,...,argN])` 
-+ 第一个参数 `dest` 表示目标对象
-+ 后面的 `[arg1, arg2,...,argN]` 是源对象。（可传递多个）
-+ 从第二个参数开始的所有参数的属性都被拷贝到 `dest` 对象中，并返回 `dest` 。
+语法： `Object.assign(dest, [arg1, arg2,...,argN])`
+
+- 第一个参数 `dest` 表示目标对象
+- 后面的 `[arg1, arg2,...,argN]` 是源对象。（可传递多个）
+- 从第二个参数开始的所有参数的属性都被拷贝到 `dest` 对象中，并返回 `dest` 。
 
 ```js {.line-numbers}
 const user = {
-	gender: 'F'
+  gender: 'F',
 };
 
-const obj1 = {name: 'Tom'};
-const obj2 = {age: 18};
-const obj3 = {gender: 'M'};
+const obj1 = { name: 'Tom' };
+const obj2 = { age: 18 };
+const obj3 = { gender: 'M' };
 
 //如果被拷贝的属性名已经存在，那么它会被新的属性覆盖
 Object.assign(user, obj1, obj2, obj3);
 
-console.log(user); 
+console.log(user);
 /* {
     "name": "Tom",
     "age": 18,
@@ -266,8 +273,8 @@ console.log(user);
 
 ```js {.line-numbers}
 const user = {
-	name: 'Tom',
-	age: 18
+  name: 'Tom',
+  age: 18,
 };
 
 // 同样也会将user中的所有属性拷贝到 一个空对象中，并返回这个新的对象
@@ -278,10 +285,10 @@ let user2 = Object.assign({}, user);
 
 ```js {.line-numbers}
 const user = {
-	name: 'Tom',
-	age: 18,
-	hobbies: ['football']
-}
+  name: 'Tom',
+  age: 18,
+  hobbies: ['football'],
+};
 
 const user2 = Object.assign({}, user);
 
@@ -320,22 +327,22 @@ console.log(user2);
     ]
 }
 */
-
 ```
 
 ## 深拷贝
+
 #深拷贝 #lodash
 
-可以 使用 `lodash` 库的 `_.cloneDeep(obj)`  来实现 ”深拷贝“：
+可以 使用 `lodash` 库的 `_.cloneDeep(obj)` 来实现 ”深拷贝“：
 
 ```js {.line-numbers}
 const user = {
-	name: 'Tom',
-	age: 18,
-	hobbies: ['football']
-}
+  name: 'Tom',
+  age: 18,
+  hobbies: ['football'],
+};
 
-const user2 =_.cloneDeep(user);
+const user2 = _.cloneDeep(user);
 
 user2.hobbies.push('basketball');
 
@@ -349,18 +356,19 @@ console.log(user2);
 
 ```js {.line-numbers}
 let user = {
-	name: 'Tom',
-	age: 18,
-	say: function() {
-		console.log(`My name is ${this.name}`);
-	},
-	play() {
-		console.log("方法的简写形式");
-	}
+  name: 'Tom',
+  age: 18,
+  say: function () {
+    console.log(`My name is ${this.name}`);
+  },
+  play() {
+    console.log('方法的简写形式');
+  },
 };
 ```
 
 ## this
+
 #this
 
 ### 方法中的 ”this“
@@ -368,20 +376,20 @@ let user = {
 在方法中为了访问该对象，可以使用 `this` 关键字。 `this` 的值就是在 **点之前** 的这个对象，即调用该方法的对象。
 
 ```js {.line-numbers}
-user.say();   // 此时，say()中的this就是前面的user对象。
+user.say(); // 此时，say()中的this就是前面的user对象。
 ```
 
 ### "this" 不受限制
 
-javascript中的 `this` 可以用于任何函数，即使它不是对象的方法。 `this` 的值是在代码运行时 ***计算出来*** 的，它取决于代码上下文。
-在 JavaScript 中，`this` 是“自由”的，它的值是在调用时计算出来的，它的值并不取决于方法声明的位置，而是取决于在“点符号前”的是什么对象。
+javascript 中的 `this` 可以用于任何函数，即使它不是对象的方法。 `this` 的值是在代码运行时 **_计算出来_** 的，它取决于代码上下文。
+在 JavaScript 中，`this`  是“自由”的，它的值是在调用时计算出来的，它的值并不取决于方法声明的位置，而是取决于在“点符号前”的是什么对象。
 
 ```js {.line-numbers}
-let obj1 = {name: 'Tom'};
-let obj2 = {name: 'Jack'};
+let obj1 = { name: 'Tom' };
+let obj2 = { name: 'Jack' };
 
 function doSomething() {
-	console.log(this.name);
+  console.log(this.name);
 }
 
 // 在严格模式下"use strict", 此时的this值为undefined, 所以 this.name 会报错
@@ -395,19 +403,19 @@ obj1.a(); // Tom , 此时的this指向obj1
 obj2.b(); // Jack , 此时的this指向obj2
 ```
 
-
 ## 箭头函数
+
 #箭头函数
 
 箭头函数没有自己的 `this` ，在箭头函数内部访问的 `this` 都是从外部获取的。
 
 ```js {.line-numbers}
 let user = {
-	name: 'tom',
-	say: () => { 
-		// 这里this，会从user中获取
-		console.log(this);
-	}
+  name: 'tom',
+  say: () => {
+    // 这里this，会从user中获取
+    console.log(this);
+  },
 };
 //此时，由于 user前面没有“点”的调用，所以此时的 this 指向全局对象，浏览器中为window对象
 user.say();
@@ -415,87 +423,96 @@ user.say();
 
 ```js {.line-numbers}
 let user = {
-	name: 'tom',
-	say() {
-		(
-		//此时的 this 从say()中获取，因为此处的say()为 user对象的方法，所以，this指向 user 对象
-		() => {console.log(this.name);}
-		)();
-	}
-}
+  name: 'tom',
+  say() {
+    //此时的 this 从say()中获取，因为此处的say()为 user对象的方法，所以，this指向 user 对象
+    (() => {
+      console.log(this.name);
+    })();
+  },
+};
 
 // 此时，say() 中的 this 指向的就是 user 对象。
 user.say();
 ```
 
 ## 构造函数
+
 #构造函数 #new
 
 构造函数 也是常规函数，只是对于它有 2 个共同的约定：
+
 1. 以大写字母开头
 2. 只能由 `new` 操作符来执行
+
 ```js {.line-numbers}
 function User(name, age) {
-	this.name = name;
-	this.age = age;
+  this.name = name;
+  this.age = age;
 }
 ```
 
 当一个函数被使用 `new` 操作符执行时，它会按照以下步骤：
+
 1. 一个新的空对象被创建，并分配给 `this`。
 2. 函数体执行。通常它会修改 `this` ，为其添加新的属性。
-3. 返回 `this` 的值。（如果函数中没有 return 或者 有 return 但不是返回一个对象时，此时会返回 this ；如果 return 一个对象，此时返回的对象会替换返回this）
+3. 返回 `this` 的值。（如果函数中没有 return 或者 有 return 但不是返回一个对象时，此时会返回 this ；如果 return 一个对象，此时返回的对象会替换返回 this）
+
 ```js {.line-numbers}
 new User('Tom', 18);
 
 // 它会相当做如下几步：
 function User(name, age) {
-	// this = {} ； 一个新的空对象被创建，并分配给 `this`
+  // this = {} ； 一个新的空对象被创建，并分配给 `this`
 
-	// 添加属性
-	this.name = name;
-	this.age = age;
+  // 添加属性
+  this.name = name;
+  this.age = age;
 
-	// 返回 this ，隐式返回
-	// return this; 
+  // 返回 this ，隐式返回
+  // return this;
 }
 ```
 
 ```js {.line-numbers}
 function User(name) {
-	this.name = name;
+  this.name = name;
 
-	// 此时返回的是一个新的对象，则不会返回 this
-	return {
-		name: '不返回this了'
-	}
+  // 此时返回的是一个新的对象，则不会返回 this
+  return {
+    name: '不返回this了',
+  };
 }
 ```
 
-可以使用 `new.target` 属性来检查它是否被使用 `new` 进行调用：
+可以使用  `new.target`  属性来检查它是否被使用  `new`  进行调用：
+
 ```js {.line-numbers}
 function User() {
-	if (new.target === undefined) {
-		// 表示没有使用new操作符来进行执行
-		//....
-	}
+  if (new.target === undefined) {
+    // 表示没有使用new操作符来进行执行
+    //....
+  }
 }
 
 User(); // 没有使用 new 来执行
 ```
 
-## 可选链  "?."
+## 可选链 "?."
+
 #可选链 #polyfills
 
 可选链 `?.` 是一种访问嵌套对象属性的安全方式。它是最近才添加到 javascript 中的特性，旧式浏览器可能需要 `polyfills` 。
-- 如果 *可选链* `?.` 前面的值为 `undefined` 或者 `null` ， 它会停止运算并返回 `undefined` 。
-- *可选链* `?.` 是针对其前面的值成为可选值，对其后面的值不起作用。
-- *可选链* `?.`  可以用来安全地读取或者删除，但不能用于写入。
 
-*可选链* `?.` 语法的3种形式：
-- `obj?.prop`  -- 如果 `obj` 存在则返回 `obj.prop` ， 否则返回 `undefined`
-- `obj?.[prop]`  --  如果 `obj` 存在则返回 `obj[prop]`， 否则返回 `undefined`
-- `obj.method?.()`  --  如果 `obj.method` 存在则调用 `obj.method()`， 否则返回 `undefined`
+- 如果 _可选链_ `?.` 前面的值为 `undefined` 或者 `null` ， 它会停止运算并返回 `undefined` 。
+- _可选链_ `?.` 是针对其前面的值成为可选值，对其后面的值不起作用。
+- _可选链_ `?.` 可以用来安全地读取或者删除，但不能用于写入。
+
+_可选链_ `?.` 语法的 3 种形式：
+
+- `obj?.prop` -- 如果 `obj` 存在则返回 `obj.prop` ， 否则返回 `undefined`
+- `obj?.[prop]` -- 如果 `obj` 存在则返回 `obj[prop]`， 否则返回 `undefined`
+- `obj.method?.()` -- 如果 `obj.method` 存在则调用 `obj.method()`， 否则返回 `undefined`
 
 ```js {.line-numbers}
 const user = {};
@@ -508,7 +525,6 @@ user?.say(a++); // 如果 没有user，则say()和a++不会执行
 user.say?.(); // 如果 user.say存在，则调用，返回啥都不会发生
 
 user?.['name']; // 如果 user中存在 name ，则返回 user['name']，否则 返回 undefined
-
 ```
 
 ## 原始值转换
@@ -517,33 +533,35 @@ user?.['name']; // 如果 user中存在 name ，则返回 user['name']，否则 
 
 类型转换在各种情况下有三种变体。它们被称为 `“hint”`。它们分别是：`"string"`, `"number"`, `"default"`。
 
-默认情况下，普通对象具有 `toString` 和 `valueOf` 方法：
-- `toString` 方法返回一个字符串 `"[object Object]"`。
-- `valueOf` 方法返回对象自身。
+默认情况下，普通对象具有  `toString`  和  `valueOf`  方法：
+
+- `toString`  方法返回一个字符串  `"[object Object]"`。
+- `valueOf`  方法返回对象自身。
 
 ```js {.line-numbers}
-let user = {name: "John"}; 
+let user = { name: 'John' };
 
-alert(user); // [object Object] 
+alert(user); // [object Object]
 alert(user.valueOf() === user); // true
 ```
 
-javascript 中提供了3个用于进行转换的方法：
+javascript 中提供了 3 个用于进行转换的方法：
+
 1. 调用 `obj[Symbol.toPrimitivel](hint)` 如果这个方法存在的话。
-2. 否则，对于 `"string"` hint：调用 `toString` 方法，如果它不存在，则调用 `valueOf` 方法（因此，对于字符串转换，优先调用 `toString`）。
-3. 否则，对于其他 hint：调用 `valueOf` 方法，如果它不存在，则调用 `toString` 方法（因此，对于数学运算，优先调用 `valueOf` 方法）。
+2. 否则，对于  `"string"` hint：调用  `toString`  方法，如果它不存在，则调用  `valueOf`  方法（因此，对于字符串转换，优先调用  `toString`）。
+3. 否则，对于其他 hint：调用  `valueOf`  方法，如果它不存在，则调用  `toString`  方法（因此，对于数学运算，优先调用  `valueOf`  方法）。
 
 <font color="red">所有这些方法都必须返回一个原始值才能工作</font> 。
 
 ```js {.line-numbers}
 const user = {
-	name: 'Tom',
-	age: 18,
+  name: 'Tom',
+  age: 18,
 
-	[Symbol.toPrimitive](hint) {
-		return hint === 'string' ? `{name: "${this.name}"}` : this.age;
-	}
-}
+  [Symbol.toPrimitive](hint) {
+    return hint === 'string' ? `{name: "${this.name}"}` : this.age;
+  },
+};
 
 alert(user); // hint: string --> {name: "Tom"}
 
@@ -561,13 +579,13 @@ console.log(user + 2); // hint: default --> 20
 
 ```js {.line-numbers}
 const user = {
-	name: 'Tom',
-	age: 18, 
+  name: 'Tom',
+  age: 18,
 
-	toString() {
-		return `{name: "${this.name}"}`;
-	}
-}
+  toString() {
+    return `{name: "${this.name}"}`;
+  },
+};
 
 alert(user); // hint: string --> {name: "Tom"}
 
@@ -585,13 +603,13 @@ console.log(user + 2); // hint: default --> {name: "Tom"}2
 
 ```js {.line-numbers}
 const user = {
-	name: 'Tom',
-	age: 18, 
+  name: 'Tom',
+  age: 18,
 
-	valueOf() {
-		return this.age;
-	}
-}
+  valueOf() {
+    return this.age;
+  },
+};
 
 alert(user); // hint: string --> [object Object]
 
@@ -607,4 +625,4 @@ console.log(+user); // hint: number --> 18
 console.log(user + 2); // hint: default --> 20
 ```
 
-在实际使用中，通常只实现 `obj.toString()` 作为字符串转换的“全能”方法就足够了，该方法应该返回对象的“人类可读”表示，用于日志记录或调试。
+在实际使用中，通常只实现  `obj.toString()`  作为字符串转换的“全能”方法就足够了，该方法应该返回对象的“人类可读”表示，用于日志记录或调试。
