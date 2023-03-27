@@ -138,6 +138,8 @@ console.log(s.substr(0, 6));  // string
 console.log(s.substr(-8, 8)); // function
 ```
 
+`substr` 有一个小缺点：它不是在 JavaScript 核心规范中描述的，而是在附录 B 中。附录 B 的内容主要是描述因历史原因而遗留下来的仅浏览器特性。因此，理论上非浏览器环境可能无法支持 `substr`。
+
 |方法|选择方式|负值参数|
 |:--|:--|:--|
 |slice(start, end)| \[start, end) | 允许|
