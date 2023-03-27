@@ -39,4 +39,16 @@ v = null;
 vStr = String(v); // "null"
 ```
 
- 
+ ## 常用函数
+
+### 改变大小写
+
+`toLowerCase()` 和 `toUpperCase()` 方法可以改变大小写：
+
+```js {.line-numbers}
+let str = 'Hello, World';
+console.log(str.toLowerCase()); // hello, world
+console.log(str.toUpperCase()); // HELLO, WORLD
+```
+
+### 查找子字符串
