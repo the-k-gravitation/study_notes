@@ -139,7 +139,10 @@ console.log(s.substr(-8, 8)); // function
 ```
 
 |方法|选择方式|负值参数|
-|--|--|--|
-	|`slice(start, end)`| [start, end) | 允许|
-| `substring(start, end)` | \[start, end) | 负值都被视为0 |
+|:--|:--|:--|
+|slice(start, end)| \[start, end) | 允许|
+|substring(start, end)| \[start, end) | 负值会被视为 0|
+|substr(start, length)| 从 start开始获取长为 length的字符串 | start 允许为负|
+
+
 
