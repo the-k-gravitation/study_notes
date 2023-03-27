@@ -138,5 +138,8 @@ console.log(s.substr(0, 6));  // string
 console.log(s.substr(-8, 8)); // function
 ```
 
-\--
+|方法|选择方式|负值参数|
+|--|--|--|
+	|`slice(start, end)`| [start, end) | 允许|
+| `substring(start, end)` | \[start, end) | 负值都被视为0 |
 
