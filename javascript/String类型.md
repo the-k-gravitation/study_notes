@@ -52,3 +52,50 @@ console.log(str.toUpperCase()); // HELLO, WORLD
 ```
 
 ### 查找子字符串
+
+- `str.indexOf(substr, \[pos\])`
+在 `str` 中 查找 `substr` ， 如果找到返回匹配成功的位置，否则返回 `-1` 。 `pos` 可选，没有提供时，默认从 `str` 的第一个位置 `0` 开始。
+
+```js {.line-numbers}
+let str = 'Hello, World.';
+
+console.log(str.indexOf('o')); // 4
+console.log(str.indexOf('o', 5)); // 8
+
+console.log(str.indexOf('ol')); // -1
+```
+
+- `str.includes(substr, \[pos\])`
+`str.includes(substr, \[pos\])` 用来判断 `str` 中是否包含 `substr`，包含返回 `true` ， 否则返回 `false`。
+
+```js {.line-numbers}
+let s = 'Hello, World.';
+
+console.log(s.includes(',')); // true
+console.log(s.includes('wo', 2)); // false
+```
+
+- `str.startsWith(substr)` 和 `str.endsWith(substr)`
+`str.startsWith(substr)` 和 `str.endsWith(substr)` 使用比较简单：
+
+```js {.line-numbers}
+let s = 'Hello, World.';
+console.log(s.startsWith('He')); // true
+console.log(s.endsWith('ld')); // false
+```
+
+### 获取子字符串
+
+JavaScript 中有三种获取字符串的方法：`substring`、`substr` 和 `slice`。
+
+- `str.slice(start, \[, end\]`
+返回字符串 `[start, end)`  的部分。如果 `end` 未提供，返回 `start`到字符串末尾。
+
+```js {.line-numbers}
+let s = 'string.slice.function';
+console.log(s.slice(0, 6));  // string
+console.log(s.slice(0, 1));  // s
+console.log(s.slice(10));    // ce.function
+```
+
+`start` / `end` 也有可以是负值。 表示从字符串的结尾计算：
