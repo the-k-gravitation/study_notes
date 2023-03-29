@@ -32,6 +32,27 @@ let arr = new Array();
 let arr = []; // 这种方式用得比较多
 ```
 
+获取数组中的元素：
+
+```js {.line-numbers}
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+
+
+
+```
 
 
 ## 基础运算符，数学运算
