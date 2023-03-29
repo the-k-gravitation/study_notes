@@ -50,7 +50,9 @@ const months = [
   "December"
 ];
 
-
+const mar = months[2]; // March  ,[]中不能使用负数, 会返回 undefined
+const dec = months[-1]; // 会返回 undefined
+const oct = months.at(-3); // October, 最近才添加到 javascript中的特性，一些老的浏览器需要 使用polyfills
 
 ```
 
