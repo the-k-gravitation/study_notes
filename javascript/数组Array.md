@@ -57,5 +57,34 @@ arr[100] = 'abc';
 console.log(arr.length); // 101
 ```
 
-`length` 属性是可以被修改的。 如果手动增加 `length`的值，会在数组的后面添加相应的 `null` , 如果
+`length` 属性是可以被修改的。 如果手动增加 `length`的值，数组原有的元素不会发生变化 , 如果手动减少 `length` 的值，数组会被截断，并且这个过程是不可逆的：
+
+```js {.line-numbers}
+let arr = [1,2,3];
+
+arr.length = 4;
+console.log(arr); // [1,2,3,]   
+
+arr.length = 1;
+console.log(arr); // [1]
+```
+
+清空一个数组，可以直接将它的 `length` 设置为即可： `arr.length = 0`。
+
+javascript 中的数组 既可以作 **队列** ， 也可以用作 **栈** 。
+
+对于 `栈` 来说，最后放进去的内容是最先接收的，也叫做 `LIFO`（Last-In-First-Out），即`后进先出`法则。而与`队列`相对应的叫做 `FIFO`（First-In-First-Out），即`先进先出`。
+
+对于 `栈` 的两个操作方法：
+- `push()` 在数组末端添加元素：
+```js {.line-numbers}
+let arr = [1,2,3,4];
+
+arr.push(5);
+console.log(arr); //
+```
+- `pop()` 取出并返回数组的最后一个元素：
+
+对于 `队列` 的两个操作方法：
+
 
