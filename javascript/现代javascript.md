@@ -22,53 +22,7 @@
 
 ## 数组 Array
 
-`Array` 是有序集合。  数组元素是从 `0` 开始编号。
-
-创建一个空数组：
-
-```js {.line-numbers}
-let arr = new Array();
-
-let arr = []; // 这种方式用得比较多
-```
-
-获取数组中的元素：
-
-```js {.line-numbers}
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
-
-const mar = months[2]; // March  ,[]中不能使用负数, 会返回 undefined
-const dec = months[-1]; // 会返回 undefined
-const oct = months.at(-3); // October, 最近才添加到 javascript中的特性，一些老的浏览器需要 使用polyfills
-```
-
-创建多维数组
-
-```js {.line-numbers}
-const twoDArray = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]
-];
-
-console.log(twoDArray[0][0]); // 1
-console.log(twoDArray[1][2]); // 6
-```
-
-
+![[数组Array]]
 
 ## 基础运算符，数学运算
 
