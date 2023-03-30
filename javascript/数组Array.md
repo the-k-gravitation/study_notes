@@ -161,6 +161,14 @@ for (let i of arr) {
 ```js {.line-numbers}
 let arr = [1,2,3];
 
-console.log(String(arr)); 
-console.log
+console.log(String(arr));  // "1,2,3"
+console.log(arr.toString()); // "1,2,3"
+```
+
+数组没有 `Symbol.toPrimitive`，也没有 `valueOf`，它们只能执行 `toString` 进行转换。 当 `"+"` 运算符把一些项加到字符串后面时，加号后面的项也会被转换成字符串。
+
+```js {.line-numbers}
+console.log( [] + 1);  // "1"
+console.log([2] + 2);  // "22"
+console.log([3,4] + 2); // "3,42"
 ```
