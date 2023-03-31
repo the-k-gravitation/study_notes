@@ -219,6 +219,8 @@ arr.forEach(function(item, index, array) {
 
 ## filter()
 
+`arr.filter()` 可以对 arr 中的每个元素进行条件过滤，然后将符合条件的元素都返回成一个新的数组。
+
 语法：
 
 ```js {.line-numbers}
@@ -233,3 +235,45 @@ let arr = [10, 11, 320, 20, 50, 80];
 let result = arr.filter(item => item > 50);
 console.log(result); // [320, 80]
 ```
+
+## map()
+
+`arr.map()` 对数组的每个元素都调用函数，并返回结果数组。
+
+语法：
+
+```js {.line-numbers}
+let result = arr.map(function(item, index, array) {
+	// 代码块
+});
+```
+
+```js {.line-numbers}
+let arr = [1,2,3];
+
+let result = arr.map(item => item*3);
+console.log(result); // [3,6,9]
+```
+
+## reduce()
+
+语法：
+
+```js {.line-numbers}
+let result = arr.reduce(function(accumulator, item, index, array) {
+	// 代码块
+}); 
+```
+
+- `accumulator` —— 是上一个函数调用的结果，第一次等于 `initial`（如果提供了 `initial` 的话）。
+- `item` —— 当前的数组元素。
+- `index` —— 当前索引。
+- `arr` —— 数组本身。
+
+```js {.line-numbers}
+let arr = [1,2,3];
+
+let result = arr.reduce((sum, item) => sum + item, 0);
+console.log(result);
+```
+
