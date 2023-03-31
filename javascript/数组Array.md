@@ -176,7 +176,10 @@ console.log([3,4] + 2); // "3,42"
 
 ## splice()
 
+`arr.splice()` 方法，可以对数组 **添加，删除和插入元素**。
+
 语法：
+
 ```js {.line-numbers}
 arr.splice(start [, deleteCount, elem1, ..., elemN]);
 ```
@@ -187,8 +190,46 @@ arr.splice(start [, deleteCount, elem1, ..., elemN]);
 let arr = [1,2,3];
 
 let dels = arr.splice(2,1); // [3]  , 从索引 2 开始， 删除1个元素
-console.log(ar)
+console.log(arr); // [1,2]
 
-arr.splice(0, 0, 4,5,6); 
+arr.splice(0, 0, 4,5,6);   // 在数组最前面添加3个元素
+console.log(arr); // [4,5,6,1,2]
+
+arr.splice(-1, 0, 7, 8); // 在数组末端前一位插入7，8
+console.log(arr);  // [4, 5, 6, 1, 7, 8, 2]
 ```
 
+## 遍历：forEach()
+
+语法：
+
+```js {.line-numbers}
+arr.forEach(function(item, index, array) {
+	// 代码块
+});
+```
+
+```js {.line-numbers}
+[1,2,3].forEach(item => console.log(item*2)); // 2,4,6
+
+[1,2,3].forEach((item, index, array) => {
+	console.log(item*2);
+})
+```
+
+## filter()
+
+语法：
+
+```js {.line-numbers}
+let results = arr.filter(function(item, index, array) {
+	// 过滤逻辑
+});
+```
+
+```js {.line-numbers}
+let arr = [10, 11, 320, 20, 50, 80];
+
+let result = arr.filter(item => item > 50);
+console.log(result); // [320, 80]
+```
