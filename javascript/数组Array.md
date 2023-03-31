@@ -255,6 +255,20 @@ let result = arr.map(item => item*3);
 console.log(result); // [3,6,9]
 ```
 
+```js {.line-numbers}
+let john = { name: "John", surname: "Smith", id: 1 }; 
+let pete = { name: "Pete", surname: "Hunt", id: 2 }; 
+let mary = { name: "Mary", surname: "Key", id: 3 }; 
+
+let users = [ john, pete, mary ];
+
+//JavaScript 在这里会把 `{` 视为函数体的开始，而不是对象的开始。解决方法是将它们包装在普通括号 `()` 中
+let usersMapped = users.map(user => (
+		{ fullName: `${user.name} ${user.surname}`, id: user.id }
+	)
+);
+```
+
 ## reduce()
 
 语法：
