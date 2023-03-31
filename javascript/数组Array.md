@@ -172,3 +172,23 @@ console.log( [] + 1);  // "1"
 console.log([2] + 2);  // "22"
 console.log([3,4] + 2); // "3,42"
 ```
+
+
+## splice()
+
+语法：
+```js {.line-numbers}
+arr.splice(start [, deleteCount, elem1, ..., elemN]);
+```
+
+从索引 `start` 开始修改 `arr`：删除 `deleteCount` 个元素并在当前位置插入 `elem1, ..., elemN`， 最后返回被删除的元素所组成的数组。
+
+```js {.line-numbers}
+let arr = [1,2,3];
+
+let dels = arr.splice(2,1); // [3]  , 从索引 2 开始， 删除1个元素
+console.log(ar)
+
+arr.splice(0, 0, 4,5,6); 
+```
+
