@@ -291,3 +291,40 @@ let result = arr.reduce((sum, item) => sum + item, 0);
 console.log(result);
 ```
 
+## Iterable object（可迭代对象）
+
+可以应用 `for..of` 的对象被称为 **可迭代的**。
+
+可迭代对象必须实现 `Symbol.iterator` 方法。
+- `obj[Symbol.iterator]()` 的结果被称为 **迭代器（iterator）**。由它处理进一步的迭代过程。
+- 一个迭代器必须有 `next()` 方法，它返回一个 `{done: Boolean, value: any}` 对象，这里 `done:true` 表明迭代结束，否则 `value` 就是下一个值。
+- `Symbol.iterator` 方法会被 `for..of` 自动调用，但我们也可以直接调用它。
+- 内建的可迭代对象例如字符串和数组，都实现了 `Symbol.iterator`。
+- 字符串迭代器能够识别代理对（surrogate pair）。
+
+```js {.line-numbers}
+let range = {
+	from: 1,
+	to: 10
+};
+
+range[Symbol.iterator] = function() {
+	return {
+		current: this.from,
+		last: this.to,
+
+		next() {
+			if(this.current <= this.last){
+				return {
+					done: false, 
+					value: this.current++
+				};
+			}else {
+				return {
+					done: true
+				};
+			}
+		}
+	}
+}
+```
