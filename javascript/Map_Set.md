@@ -81,3 +81,31 @@ for (let user of set) {
 	alert(user.name); // John（然后 Pete 和 Mary）
 }
 ```
+
+## WeakMap & WeakSet
+
+`WeakMap` 和 `WeakSet` 被用作“主要”对象存储之外的“辅助”数据结构。一旦将对象从主存储器中删除，如果该对象仅被用作 `WeakMap` 或 `WeakSet` 的键，那么该对象将被自动清除。
+
+它们的主要优点是它们对对象是弱引用，所以被它们引用的对象很容易地被垃圾收集器移除。
+
+`WeakMap` 是类似于 `Map` 的集合，它仅允许对象作为键，并且一旦通过其他方式无法访问这些对象，垃圾回收便会将这些对象与其关联值一同删除。
+
+`WeakSet` 是类似于 `Set` 的集合，它仅存储对象，并且一旦通过其他方式无法访问这些对象，垃圾回收便会将这些对象删除。
+
+`WeakMap` 和 `WeakSet` 最明显的局限性就是不能迭代，并且无法获取所有当前内容。
+
+`WeakMap` 和 `Map` 的第一个不同点就是，`WeakMap` 的键必须是对象，不能是原始值：
+
+```js {.line-numbers}
+let weakMap = new WeakMap();
+
+let obj = {};
+
+weakMap.set(obj, 'obj');
+
+obj = null; 
+
+// obj 被从内存中删除，该对象将会被从内存（和map）中自动清除。
+```
+
+
