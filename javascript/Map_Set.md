@@ -14,5 +14,16 @@
 - `map.clear()` —— 清空 map。
 - `map.size` —— 返回当前元素个数。
 
+```js {.line-numbers}
+let map = new Map(); 
+
+map.set('1', 'str1'); // 字符串键 
+map.set(1, 'num1'); // 数字键 
+map.set(true, 'bool1'); // 布尔值键 
+// 还记得普通的 Object 吗? 它会将键转化为字符串 // Map 则会保留键的类型，所以下面这两个结果不同： 
+console.log( map.get(1) ); // 'num1' 
+console.log( map.get('1') ); // 'str1'
+```
+
 ## Set
 
