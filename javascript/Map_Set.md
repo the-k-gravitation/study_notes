@@ -97,15 +97,60 @@ for (let user of set) {
 `WeakMap` 和 `Map` 的第一个不同点就是，`WeakMap` 的键必须是对象，不能是原始值：
 
 ```js {.line-numbers}
-let weakMap = new WeakMap();
+let cache = new WeakMap();
 
 let obj = {};
 
-weakMap.set(obj, 'obj');
+cache.set(obj, 'obj');
 
 obj = null; 
 
 // obj 被从内存中删除，该对象将会被从内存（和map）中自动清除。
+```
+
+```js {.line-numbers}
+const cache = new WeakMap();
+
+function process(obj) {
+	if (!cache.has(obj)) {
+		let result = /*计算一个结果*/ 1;
+		cache.set(obj, result);
+	}
+
+	return cache.get(obj);
+}
+
+const obj = {}; // 一个逻辑对象
+
+const r1 = process(obj);
+const r2 = process(obj);
+
+obj = null; 
+
+// 当 obj 被垃圾回收后，缓存中的数据也会被清除
+```
+
+```js {.line-numbers}
+let visitedSet = new WeakSet(); 
+
+let john = { name: "John" }; 
+let pete = { name: "Pete" }; 
+let mary = { name: "Mary" }; 
+
+visitedSet.add(john); // John 访问了我们 
+visitedSet.add(pete); // 然后是 Pete 
+visitedSet.add(john); // John 再次访问 
+
+// visitedSet 现在有两个用户了 
+// 检查 John 是否来访过？ 
+alert(visitedSet.has(john)); // true 
+
+// 检查 Mary 是否来访过？ 
+alert(visitedSet.has(mary)); // false 
+
+john = null; 
+
+// visitedSet 将被自动清理(即自动清除其中已失效的值 john)
 ```
 
 
