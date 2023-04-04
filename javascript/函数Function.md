@@ -309,3 +309,9 @@ let timerId = setTimeout(function tick() {
 
 - 零延时调度 `setTimeout(func, 0)`（与 `setTimeout(func)` 相同）用来调度需要尽快执行的调用，但是会在当前脚本执行完成后进行调用。
 - 浏览器会将 `setTimeout` 或 `setInterval` 的五层或更多层嵌套调用（调用五次之后）的最小延时限制在 4ms。这是历史遗留问题。
+
+
+## 装饰器
+
+**装饰器** 是一个围绕改变函数行为的包装器。主要工作仍由该函数来完成。
+
