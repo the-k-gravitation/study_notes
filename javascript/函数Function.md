@@ -271,3 +271,8 @@ let sum = (a, b) => {
 
 sum(10, 20); // 30
 ```
+
+
+## 闭包
+
+[闭包](https://en.wikipedia.org/wiki/Closure_(computer_programming)) 是指一个函数可以记住其外部变量并可以访问这些变量。
