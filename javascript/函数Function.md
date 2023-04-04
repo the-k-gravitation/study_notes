@@ -235,6 +235,13 @@ isPermission(
 
 ## 箭头函数 =>
 
+箭头函数：
+
+- 没有 `this`
+- 没有 `arguments`
+- 不能使用 `new` 进行调用
+- 它们也没有 `super`
+
 ```js {.line-numbers}
 // 创建了一个箭头函数 func，它接受参数 arg1..argN个参数，然后使用参数对右侧的 expression 求值并返回其结果。
 let func = (arg1, arg2, ..., argN) => expression;
