@@ -276,3 +276,36 @@ sum(10, 20); // 30
 ## 闭包
 
 [闭包](https://en.wikipedia.org/wiki/Closure_(computer_programming)) 是指一个函数可以记住其外部变量并可以访问这些变量。
+
+## setTimeout & setInterval
+
+- `setTimeout(func, delay, ...args)` 和 `setInterval(func, delay, ...args)` 方法允许我们在 `delay` 毫秒之后运行 `func` 一次或以 `delay` 毫秒为时间间隔周期性运行 `func`。
+
+```js {.line-numbers}
+function sayHi(phrase, who) { alert( phrase + ', ' + who ); } setTimeout(sayHi, 1000, "Hello", "John");
+```
+
+- 要取消函数的执行，我们应该调用 `clearInterval/clearTimeout`，并将 `setInterval/setTimeout` 返回的值作为入参传入。
+
+```js {.line-numbers}
+let timerId = setTimeout(...); 
+clearTimeout(timerId);
+
+
+// 每 2 秒重复一次 
+let timerId = setInterval(() => alert('tick'), 2000); 
+// 5 秒之后停止 
+setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
+```
+
+- 嵌套的 `setTimeout` 比 `setInterval` 用起来更加灵活，允许我们更精确地设置两次执行之间的时间。
+
+```js {.line-numbers}
+let timerId = setTimeout(function tick() { 
+	alert('tick'); 
+	timerId = setTimeout(tick, 2000); 
+}, 2000);
+```
+
+- 零延时调度 `setTimeout(func, 0)`（与 `setTimeout(func)` 相同）用来调度需要尽快执行的调用，但是会在当前脚本执行完成后进行调用。
+- 浏览器会将 `setTimeout` 或 `setInterval` 的五层或更多层嵌套调用（调用五次之后）的最小延时限制在 4ms。这是历史遗留问题。
