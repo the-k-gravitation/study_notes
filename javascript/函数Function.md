@@ -315,3 +315,34 @@ let timerId = setTimeout(function tick() {
 
 **装饰器** 是一个围绕改变函数行为的包装器。主要工作仍由该函数来完成。
 
+- [func.call(context, arg1, arg2…)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Function/call) —— 用给定的上下文和参数调用 `func`。
+- [func.apply(context, args)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) —— 调用 `func` 将 `context` 作为 `this` 和类数组的 `args` 传递给参数列表。
+
+```js {.line-numbers}
+function spy(func) {
+	function wrapper(...args) {
+		// using ...args instead of arguments to store "real" array in wrapper.calls
+		wrapper.calls.push(args);
+		return func.apply(this, args);
+	}
+
+	wrapper.calls = [];
+	return wrapper;
+}
+
+function work(a, b) {
+	console.log(a + b); // work 是一个任意的函数或方法
+}
+
+
+work = spy(work);
+
+work(1, 2); // 3
+work(4, 5); // 9
+
+  
+for (let args of work.calls) {
+	console.log(args);
+	console.log('call:' + args.join()); // "call:1,2", "call:4,5"
+}
+```
