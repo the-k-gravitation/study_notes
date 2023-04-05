@@ -626,3 +626,42 @@ console.log(user + 2); // hint: default --> 20
 ```
 
 在实际使用中，通常只实现  `obj.toString()`  作为字符串转换的“全能”方法就足够了，该方法应该返回对象的“人类可读”表示，用于日志记录或调试。
+
+## getter & setter
+
+有两种类型的对象属性：
+- 第一种是 **数据属性**。
+- 第二种是 **访问器属性（accessor property）**。它们本质上是用于获取和设置值的函数，但从外部代码来看就像常规属性。
+
+访问器属性由 “getter” 和 “setter” 方法表示。
+
+```js {.line-numbers}
+let user = { 
+	name: "John", 
+	surname: "Smith", 
+	
+	get fullName() { 
+		return `${this.name} ${this.surname}`; 
+	}, 
+	set fullName(value) { 
+		[this.name, this.surname] = value.split(" "); 
+	}
+};
+```
+
+```js {.line-numbers}
+function User(name, birthday) { 
+	this.name = name; 
+	this.birthday = birthday; 
+	// 年龄是根据当前日期和生日计算得出的 
+	Object.defineProperty(this, "age", { 
+		get() { 
+			let todayYear = new Date().getFullYear(); 
+			return todayYear - this.birthday.getFullYear();
+		 } 
+	});
+}
+```
+
+
+一个属性要么是访问器（具有 `get/set` 方法），要么是数据属性（具有 `value`），但不能两者都是。
