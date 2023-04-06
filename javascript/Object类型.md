@@ -665,3 +665,31 @@ function User(name, birthday) {
 
 
 一个属性要么是访问器（具有 `get/set` 方法），要么是数据属性（具有 `value`），但不能两者都是。
+
+## \[\[ Prototype \]\]
+
+在 JavaScript 中，所有的对象都有一个隐藏的 `[[Prototype]]` 属性，它要么是另一个对象，要么就是 `null`。
+
+- 通过 `[[Prototype]]` 引用的对象被称为“原型”。
+- 如果我们想要读取 `obj` 的一个属性或者调用一个方法，并且它不存在，那么 JavaScript 就会尝试在原型中查找它。
+- 写/删除操作直接在对象上进行，它们不使用原型（假设它是数据属性，不是 setter）
+- 如果我们调用 `obj.method()`，而且 `method` 是从原型中获取的，`this` 仍然会引用 `obj`。因此，方法始终与当前对象一起使用，即使方法是继承的。
+- `for..in` 循环在其自身和继承的属性上进行迭代。所有其他的键/值获取方法仅对对象本身起作用。
+
+```js {.line-numbers}
+let animal = { eats: true }; 
+
+let rabbit = { 
+	jumps: true, 
+	__proto__: animal 
+}; 
+
+for(let prop in rabbit) { 
+	let isOwn = rabbit.hasOwnProperty(prop); 
+	if (isOwn) { 
+		alert(`Our: ${prop}`); // Our: jumps 
+	} else { 
+		alert(`Inherited: ${prop}`); // Inherited: eats 
+	} 
+}
+```
