@@ -235,12 +235,42 @@ isPermission(
 
 ## 箭头函数 =>
 
+#箭头函数 
+
 箭头函数：
 
-- 没有 `this`
-- 没有 `arguments`
-- 不能使用 `new` 进行调用
-- 它们也没有 `super`
+- 没有  `this`
+
+```js {.line-numbers}
+let user = {
+  name: 'tom',
+  say: () => {
+    // 这里this，会从user中获取
+    console.log(this);
+  },
+};
+//此时，由于 user前面没有“点”的调用，所以此时的 this 指向全局对象，浏览器中为window对象
+user.say();
+```
+
+```js {.line-numbers}
+let user = {
+  name: 'tom',
+  say() {
+    //此时的 this 从say()中获取，因为此处的say()为 user对象的方法，所以，this指向 user 对象
+    (() => {
+      console.log(this.name);
+    })();
+  },
+};
+
+// 此时，say() 中的 this 指向的就是 user 对象。
+user.say();
+```
+
+- 没有  `arguments`
+- 不能使用  `new`  进行调用
+- 它们也没有  `super`
 
 ```js {.line-numbers}
 // 创建了一个箭头函数 func，它接受参数 arg1..argN个参数，然后使用参数对右侧的 expression 求值并返回其结果。
@@ -279,77 +309,76 @@ let sum = (a, b) => {
 sum(10, 20); // 30
 ```
 
-
 ## 闭包
 
-[闭包](https://en.wikipedia.org/wiki/Closure_(computer_programming)) 是指一个函数可以记住其外部变量并可以访问这些变量。
+[闭包](<https://en.wikipedia.org/wiki/Closure_(computer_programming)>)  是指一个函数可以记住其外部变量并可以访问这些变量。
 
 ## setTimeout & setInterval
 
-- `setTimeout(func, delay, ...args)` 和 `setInterval(func, delay, ...args)` 方法允许我们在 `delay` 毫秒之后运行 `func` 一次或以 `delay` 毫秒为时间间隔周期性运行 `func`。
+- `setTimeout(func, delay, ...args)`  和  `setInterval(func, delay, ...args)`  方法允许我们在  `delay`  毫秒之后运行  `func`  一次或以  `delay`  毫秒为时间间隔周期性运行  `func`。
 
 ```js {.line-numbers}
-function sayHi(phrase, who) { alert( phrase + ', ' + who ); } setTimeout(sayHi, 1000, "Hello", "John");
+function sayHi(phrase, who) {
+  alert(phrase + ', ' + who);
+}
+setTimeout(sayHi, 1000, 'Hello', 'John');
 ```
 
-- 要取消函数的执行，我们应该调用 `clearInterval/clearTimeout`，并将 `setInterval/setTimeout` 返回的值作为入参传入。
+- 要取消函数的执行，我们应该调用  `clearInterval/clearTimeout`，并将  `setInterval/setTimeout`  返回的值作为入参传入。
 
 ```js {.line-numbers}
-let timerId = setTimeout(...); 
+let timerId = setTimeout(...);
 clearTimeout(timerId);
 
 
-// 每 2 秒重复一次 
-let timerId = setInterval(() => alert('tick'), 2000); 
-// 5 秒之后停止 
+// 每 2 秒重复一次
+let timerId = setInterval(() => alert('tick'), 2000);
+// 5 秒之后停止
 setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```
 
-- 嵌套的 `setTimeout` 比 `setInterval` 用起来更加灵活，允许我们更精确地设置两次执行之间的时间。
+- 嵌套的  `setTimeout`  比  `setInterval`  用起来更加灵活，允许我们更精确地设置两次执行之间的时间。
 
 ```js {.line-numbers}
-let timerId = setTimeout(function tick() { 
-	alert('tick'); 
-	timerId = setTimeout(tick, 2000); 
+let timerId = setTimeout(function tick() {
+  alert('tick');
+  timerId = setTimeout(tick, 2000);
 }, 2000);
 ```
 
-- 零延时调度 `setTimeout(func, 0)`（与 `setTimeout(func)` 相同）用来调度需要尽快执行的调用，但是会在当前脚本执行完成后进行调用。
-- 浏览器会将 `setTimeout` 或 `setInterval` 的五层或更多层嵌套调用（调用五次之后）的最小延时限制在 4ms。这是历史遗留问题。
-
+- 零延时调度  `setTimeout(func, 0)`（与  `setTimeout(func)`  相同）用来调度需要尽快执行的调用，但是会在当前脚本执行完成后进行调用。
+- 浏览器会将  `setTimeout`  或  `setInterval`  的五层或更多层嵌套调用（调用五次之后）的最小延时限制在 4ms。这是历史遗留问题。
 
 ## 装饰器
 
-**装饰器** 是一个围绕改变函数行为的包装器。主要工作仍由该函数来完成。
+**装饰器**  是一个围绕改变函数行为的包装器。主要工作仍由该函数来完成。
 
-- [func.call(context, arg1, arg2…)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Function/call) —— 用给定的上下文和参数调用 `func`。
-- [func.apply(context, args)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) —— 调用 `func` 将 `context` 作为 `this` 和类数组的 `args` 传递给参数列表。
+- [func.call(context, arg1, arg2…)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Function/call) —— 用给定的上下文和参数调用  `func`。
+- [func.apply(context, args)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) —— 调用  `func`  将  `context`  作为  `this`  和类数组的  `args`  传递给参数列表。
 
 ```js {.line-numbers}
 function spy(func) {
-	function wrapper(...args) {
-		// using ...args instead of arguments to store "real" array in wrapper.calls
-		wrapper.calls.push(args);
-		return func.apply(this, args);
-	}
+  function wrapper(...args) {
+    // using ...args instead of arguments to store "real" array in wrapper.calls
+    wrapper.calls.push(args);
+    return func.apply(this, args);
+  }
 
-	wrapper.calls = [];
-	return wrapper;
+  wrapper.calls = [];
+  return wrapper;
 }
 
 function work(a, b) {
-	console.log(a + b); // work 是一个任意的函数或方法
+  console.log(a + b); // work 是一个任意的函数或方法
 }
-
 
 work = spy(work);
 
 work(1, 2); // 3
 work(4, 5); // 9
 
-  
 for (let args of work.calls) {
-	console.log(args);
-	console.log('call:' + args.join()); // "call:1,2", "call:4,5"
+  console.log(args);
+  console.log('call:' + args.join()); // "call:1,2", "call:4,5"
 }
 ```

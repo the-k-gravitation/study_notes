@@ -403,38 +403,7 @@ obj1.a(); // Tom , 此时的this指向obj1
 obj2.b(); // Jack , 此时的this指向obj2
 ```
 
-## 箭头函数
 
-#箭头函数
-
-箭头函数没有自己的 `this` ，在箭头函数内部访问的 `this` 都是从外部获取的。
-
-```js {.line-numbers}
-let user = {
-  name: 'tom',
-  say: () => {
-    // 这里this，会从user中获取
-    console.log(this);
-  },
-};
-//此时，由于 user前面没有“点”的调用，所以此时的 this 指向全局对象，浏览器中为window对象
-user.say();
-```
-
-```js {.line-numbers}
-let user = {
-  name: 'tom',
-  say() {
-    //此时的 this 从say()中获取，因为此处的say()为 user对象的方法，所以，this指向 user 对象
-    (() => {
-      console.log(this.name);
-    })();
-  },
-};
-
-// 此时，say() 中的 this 指向的就是 user 对象。
-user.say();
-```
 
 ## 构造函数
 
@@ -694,4 +663,8 @@ for(let prop in rabbit) {
 }
 ```
 
-
+## 所有的内建对象都遵循相同的模式（pattern）：
+- 方法都存储在 prototype 中（`Array.prototype`、`Object.prototype`、`Date.prototype` 等）。
+- 对象本身只存储数据（数组元素、对象属性、日期）。
+- 原始数据类型也将方法存储在包装器对象的 prototype 中：`Number.prototype`、`String.prototype` 和 `Boolean.prototype`。只有 `undefined` 和 `null` 没有包装器对象。
+- 内建原型可以被修改或被用新的方法填充。但是不建议更改它们。唯一允许的情况可能是，当我们添加一个还没有被 JavaScript 引擎支持，但已经被加入 JavaScript 规范的新标准时，才可能允许这样做。
