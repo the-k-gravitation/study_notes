@@ -666,7 +666,7 @@ function User(name, birthday) {
 
 一个属性要么是访问器（具有 `get/set` 方法），要么是数据属性（具有 `value`），但不能两者都是。
 
-## \[\[ Prototype \]\]
+## Prototype 
 
 在 JavaScript 中，所有的对象都有一个隐藏的 `[[Prototype]]` 属性，它要么是另一个对象，要么就是 `null`。
 
