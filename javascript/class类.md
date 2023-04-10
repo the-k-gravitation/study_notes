@@ -25,3 +25,11 @@ class User {
 
 new User().sayHi();
 ```
+
+## 类的继承
+
+- 扩展一个类：`class Child extends Parent`， 这意味着 `Child.prototype.__proto__` 将是 `Parent.prototype`，所以方法会被继承。
+
+- 重写一个 constructor，在使用 `this` 之前，我们必须在 `Child` 的 constructor 中将父 constructor 调用为 `super()`。
+- 重写一个方法， 可以在一个 `Child` 方法中使用 `super.method()` 来调用 `Parent` 方法。
+- 箭头函数没有自己的 `this` 或 `super`。
