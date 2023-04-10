@@ -26,4 +26,6 @@
 
 ## [函数 Function](./函数Function.md)
 
+## [Class](./class类.md)
+
 ## [JSON](./JSON.md)
