@@ -94,3 +94,16 @@ class MyClass {
 MyClass.property = ... 
 MyClass.method = ...
 ```
+
+“extends” 语法会设置两个原型：
+
+1. 在构造函数的 `"prototype"` 之间设置原型（为了获取实例方法）。
+2. 在构造函数之间会设置原型（为了获取静态方法）。
+
+```js {.line-numbers}
+class A1 extends Object {}
+class A2 {}
+
+A1.getOwnPropertyNames({a:1, b:2}); // a,b
+A2.getOwnPropertyNames({a:1, b:2}); // 报错 ，因为A2没有提供对Object的静态方法的访问
+```
