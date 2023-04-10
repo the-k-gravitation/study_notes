@@ -403,8 +403,6 @@ obj1.a(); // Tom , 此时的this指向obj1
 obj2.b(); // Jack , 此时的this指向obj2
 ```
 
-
-
 ## 构造函数
 
 #构造函数 #new
@@ -599,72 +597,73 @@ console.log(user + 2); // hint: default --> 20
 ## getter & setter
 
 有两种类型的对象属性：
-- 第一种是 **数据属性**。
-- 第二种是 **访问器属性（accessor property）**。它们本质上是用于获取和设置值的函数，但从外部代码来看就像常规属性。
+
+- 第一种是  **数据属性**。
+- 第二种是  **访问器属性（accessor property）**。它们本质上是用于获取和设置值的函数，但从外部代码来看就像常规属性。
 
 访问器属性由 “getter” 和 “setter” 方法表示。
 
 ```js {.line-numbers}
-let user = { 
-	name: "John", 
-	surname: "Smith", 
-	
-	get fullName() { 
-		return `${this.name} ${this.surname}`; 
-	}, 
-	set fullName(value) { 
-		[this.name, this.surname] = value.split(" "); 
-	}
+let user = {
+  name: 'John',
+  surname: 'Smith',
+
+  get fullName() {
+    return `${this.name} ${this.surname}`;
+  },
+  set fullName(value) {
+    [this.name, this.surname] = value.split(' ');
+  },
 };
 ```
 
 ```js {.line-numbers}
-function User(name, birthday) { 
-	this.name = name; 
-	this.birthday = birthday; 
-	// 年龄是根据当前日期和生日计算得出的 
-	Object.defineProperty(this, "age", { 
-		get() { 
-			let todayYear = new Date().getFullYear(); 
-			return todayYear - this.birthday.getFullYear();
-		 } 
-	});
+function User(name, birthday) {
+  this.name = name;
+  this.birthday = birthday;
+  // 年龄是根据当前日期和生日计算得出的
+  Object.defineProperty(this, 'age', {
+    get() {
+      let todayYear = new Date().getFullYear();
+      return todayYear - this.birthday.getFullYear();
+    },
+  });
 }
 ```
 
+一个属性要么是访问器（具有  `get/set`  方法），要么是数据属性（具有  `value`），但不能两者都是。
 
-一个属性要么是访问器（具有 `get/set` 方法），要么是数据属性（具有 `value`），但不能两者都是。
+## Prototype
 
-## Prototype 
+在 JavaScript 中，所有的对象都有一个隐藏的  `[[Prototype]]`  属性，它要么是另一个对象，要么就是  `null`。
 
-在 JavaScript 中，所有的对象都有一个隐藏的 `[[Prototype]]` 属性，它要么是另一个对象，要么就是 `null`。
-
-- 通过 `[[Prototype]]` 引用的对象被称为“原型”。
-- 如果我们想要读取 `obj` 的一个属性或者调用一个方法，并且它不存在，那么 JavaScript 就会尝试在原型中查找它。
+- 通过  `[[Prototype]]`  引用的对象被称为“原型”。
+- 如果我们想要读取  `obj`  的一个属性或者调用一个方法，并且它不存在，那么 JavaScript 就会尝试在原型中查找它。
 - 写/删除操作直接在对象上进行，它们不使用原型（假设它是数据属性，不是 setter）
-- 如果我们调用 `obj.method()`，而且 `method` 是从原型中获取的，`this` 仍然会引用 `obj`。因此，方法始终与当前对象一起使用，即使方法是继承的。
-- `for..in` 循环在其自身和继承的属性上进行迭代。所有其他的键/值获取方法仅对对象本身起作用。
+- 如果我们调用  `obj.method()`，而且  `method`  是从原型中获取的，`this`  仍然会引用  `obj`。因此，方法始终与当前对象一起使用，即使方法是继承的。
+- `for..in`  循环在其自身和继承的属性上进行迭代。所有其他的键/值获取方法仅对对象本身起作用。
 
 ```js {.line-numbers}
-let animal = { eats: true }; 
+let animal = { eats: true };
 
-let rabbit = { 
-	jumps: true, 
-	__proto__: animal 
-}; 
+let rabbit = {
+  jumps: true,
+  __proto__: animal,
+};
 
-for(let prop in rabbit) { 
-	let isOwn = rabbit.hasOwnProperty(prop); 
-	if (isOwn) { 
-		alert(`Our: ${prop}`); // Our: jumps 
-	} else { 
-		alert(`Inherited: ${prop}`); // Inherited: eats 
-	} 
+for (let prop in rabbit) {
+  let isOwn = rabbit.hasOwnProperty(prop);
+  if (isOwn) {
+    alert(`Our: ${prop}`); // Our: jumps
+  } else {
+    alert(`Inherited: ${prop}`); // Inherited: eats
+  }
 }
 ```
 
 ## 所有的内建对象都遵循相同的模式（pattern）：
-- 方法都存储在 prototype 中（`Array.prototype`、`Object.prototype`、`Date.prototype` 等）。
+
+- 方法都存储在 prototype 中（`Array.prototype`、`Object.prototype`、`Date.prototype`  等）。
 - 对象本身只存储数据（数组元素、对象属性、日期）。
-- 原始数据类型也将方法存储在包装器对象的 prototype 中：`Number.prototype`、`String.prototype` 和 `Boolean.prototype`。只有 `undefined` 和 `null` 没有包装器对象。
+- 原始数据类型也将方法存储在包装器对象的 prototype 中：`Number.prototype`、`String.prototype`  和  `Boolean.prototype`。只有  `undefined`  和  `null`  没有包装器对象。
 - 内建原型可以被修改或被用新的方法填充。但是不建议更改它们。唯一允许的情况可能是，当我们添加一个还没有被 JavaScript 引擎支持，但已经被加入 JavaScript 规范的新标准时，才可能允许这样做。
