@@ -107,3 +107,29 @@ class A2 {}
 A1.getOwnPropertyNames({a:1, b:2}); // a,b
 A2.getOwnPropertyNames({a:1, b:2}); // 报错 ，因为A2没有提供对Object的静态方法的访问
 ```
+
+## 私有的和受保护的属性和方法
+
+在 JavaScript 中，有两种类型的对象字段（属性和方法）：
+
+- 公共的：可从任何地方访问。它们构成了外部接口。到目前为止，我们只使用了公共的属性和方法。
+- 私有的：只能从类的内部访问。这些用于内部接口。
+
+**受保护的属性通常以下划线 `_` 作为前缀。** 这个不是语言级别的强制，而只是大家的共识约定。 受保护的字段是可以被继承的。
+
+```js {.line-numbers}
+class A {
+	_count = 0;
+
+	// 可以通过 getter/setter来为外面提供访问
+	get count() {
+		return this._count;
+	}
+
+	set count(value) {
+		if (value >= 0){
+			this._count = value;
+		}
+	}
+}
+```
