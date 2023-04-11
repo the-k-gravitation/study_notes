@@ -87,11 +87,39 @@ class Parent extends React.Component {
 ## 生命周期
 
 ```mermaid
-graph TD
-start([开始]) --> getDefaultProps
- --> getInitialState
- --> componentWillMount
---> render
---> componentDidMount
---> cl((运行中))
+flowchart TD
+start([开始]) --> a1(getDefaultProps)
+
+  a1 --> a2(getInitialState)
+subgraph " "
+  a2 --> a3(componentWillMount)
+  a3 --> a4(render)
+  a4 --> a5(componentDidMount)
+end
+
+a5 --> a6((运行中))
+
+subgraph " "
+a6 --> a8>属性props改变]
+a6 --> a9>状态state改变]
+
+
+a8 --> a10(componentWillreceiveProps)
+
+a9 --> a11>状态state设置]
+a11 --> a12(shouldComponentUpdate)
+
+a10 --> a12
+
+a12 -- true --> a13(componentWillUpdate)
+a12 -- false --> a6
+a13 --> a16(render)
+end
+
+a6 --> a7>卸载Unmount]
+subgraph " "
+a7 --> a14(componentWillUnmount)
+end
+
+a14 --> a15((结束))
 ```
