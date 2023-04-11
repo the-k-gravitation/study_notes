@@ -17,10 +17,68 @@
 
 ## 函数组件
 
-函数组件属于“静态”组件，即函数组件第一次渲染完毕后，组件的View，不会随组件中的数据的变化而更新，即视图不会再更新了。
+函数组件属于“静态”组件，即函数组件第一次渲染完毕后，组件的 View，不会随组件中的数据的变化而更新，即视图不会再更新了。
+
+```jsx {.line-numbers}
+import React from 'react';
+
+const FunctionComponent = function FunctionComponent() {
+  let num = 0;
+  return (
+    <div>
+      {num}
+      <br />
+      <button
+        onClick={() => {
+          num++;
+          console.log(num); // 变量值会增加，但组件视图不会更新渲染
+        }}>
+        增加
+      </button>
+    </div>
+  );
+};
+
+export default FunctionComponent;
+```
 
 在函数组件中使用 `Hooks函数` （即 `Hooks` 组件），也可以对函数组件的视图进行更新。
 
 ## 类组件
 
 类组件属于“动态”组件。
+
+```jsx {.line-numbers}
+import React from 'react';
+import PropTypes from 'prop-types';
+
+class Parent extends React.Component {
+  // 属性默认值设置
+  static defaultProps = {
+    title: '这是一个默认标题',
+    sum: 0,
+  };
+  // 属性规则校验
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    sum: PropTypes.number,
+  };
+
+  // 状态
+  state = {
+    x: 1,
+    y: 2,
+  };
+
+  // render 视图
+  render() {
+    let { x, y } = this.state;
+    return (
+      <div>
+        <span>x= {x}</span>
+        <span>y= {y} </span>
+      </div>
+    );
+  }
+}
+```
