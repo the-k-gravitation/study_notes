@@ -47,6 +47,7 @@ export default FunctionComponent;
 ## 类组件
 
 类组件属于“动态”组件。
+它继承自 `React.Component` 或者 `React.PureComponent` 。
 
 ```jsx {.line-numbers}
 import React from 'react';
@@ -81,4 +82,11 @@ class Parent extends React.Component {
     );
   }
 }
+```
+
+## 生命周期
+
+```mermaid
+graph TD
+A --> B
 ```
