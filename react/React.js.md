@@ -88,5 +88,10 @@ class Parent extends React.Component {
 
 ```mermaid
 graph TD
-A --> B
+start([开始]) --> getDefaultProps
+ --> getInitialState
+ --> componentWillMount
+--> render
+--> componentDidMount
+--> cl((运行中))
 ```
