@@ -91,3 +91,42 @@ class Parent extends React.Component {
 ## 受控组件
 
 ## 非受控组件
+
+## Ref
+
+使用 `Ref` 获取 DOM 元素的三种方式：
+
+- 在元素上将 `ref` 属性设置成一个函数【推荐使用这种方式】：
+
+```jsx {.line-numbers}
+<h2 ref={(x) => (this.box = x)} className="title">
+  Ref 使用函数形式
+</h2>;
+
+// 然后就可以直接能this.box来访问获取的DOM元素
+console.log(this.box);
+```
+
+- 在元素上将 `ref` 属性设置成一个“名字”【已经被 deprecated，不推荐使用】：
+
+```js {.line-numbers}
+<h2 ref="box" className="title">
+  Ref 直接使用名字形式
+</h2>;
+
+// 然后通过 this.refs.box来访问获取的DOM元素
+console.log(this.refs.box);
+```
+
+- 使用 `React.createRef()` 创建一个 `ref` 对象：
+
+```js {.line-numbers}
+const box = React.createRef();
+
+<h2 ref={this.box} className="title">
+  Ref 直接使用名字形式
+</h2>;
+
+// 通过 ref 对象上的 current 属性来获取DOM元素
+console.log(this.box.current);
+```
