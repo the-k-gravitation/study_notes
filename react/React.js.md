@@ -165,6 +165,10 @@ console.log(this.box); // 通过this.box即可获取 button元素
 
 ```jsx
 setState([partialState], [callback]);
+// 或者
+setState((prevState) => {
+  // ...
+});
 ```
 
 如果提供了 `callback` 回调函数，则它会在 `componentDidUpdate` 之后执行，或者当 `shouldComponentUpdate` 返回了 `false` 时，它也会执行。
