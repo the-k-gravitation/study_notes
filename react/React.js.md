@@ -109,7 +109,7 @@ console.log(this.box);
 
 - 在元素上将 `ref` 属性设置成一个“名字”【已经被 deprecated，不推荐使用】：
 
-```js {.line-numbers}
+```jsx {.line-numbers}
 <h2 ref="box" className="title">
   Ref 直接使用名字形式
 </h2>;
@@ -120,7 +120,7 @@ console.log(this.refs.box);
 
 - 使用 `React.createRef()` 创建一个 `ref` 对象：
 
-```js {.line-numbers}
+```jsx {.line-numbers}
 const box = React.createRef();
 
 <h2 ref={this.box} className="title">
@@ -130,3 +130,36 @@ const box = React.createRef();
 // 通过 ref 对象上的 current 属性来获取DOM元素
 console.log(this.box.current);
 ```
+
+给元素标签设置 `ref`， 可以获取对应的 DOM 元素。
+给类组件设置 `ref`， 可以获取该类组件的实例对象。
+对于函数组件，不能直接设置 `ref`属性，需要使用 `React.forwardRef` 来实现 `ref`的转发：
+
+```jsx {.line-numbers}
+// 使用React.forwardRef来对函数组件进行处理，并将ref通过函数组件的第二个参数进行传入
+const Child = React.forwardRef(function Child(props, ref) {
+  return (
+    <div>
+      子组件
+      <button ref={ref}>Submit</button>
+    </div>
+  );
+});
+
+// 在函数组件上进行ref设置
+<Child ref={(x) => (this.box = x)} />;
+
+console.log(this.box); // 通过this.box即可获取 button元素
+```
+
+## setState
+
+`setState()` 在 `React18` 中是异步执行的。
+
+语法：
+
+```jsx
+setState([partialState], [callback]);
+```
+
+如果提供了 `callback` 回调函数，则它会在 `componentDidUpdate` 之后执行，或者当 `shouldComponentUpdate` 返回了 `false` 时，它也会执行。
