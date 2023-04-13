@@ -19,6 +19,8 @@
 
 函数组件属于“静态”组件，即函数组件第一次渲染完毕后，组件的 View，不会随组件中的数据的变化而更新，即视图不会再更新了。
 
+函数组件不具备状态、生命周期函数、`ref` 等内容。
+
 ```jsx {.line-numbers}
 import React from 'react';
 
@@ -136,15 +138,18 @@ console.log(this.box.current);
 对于函数组件，不能直接设置 `ref`属性，需要使用 `React.forwardRef` 来实现 `ref`的转发：
 
 ```jsx {.line-numbers}
-// 使用React.forwardRef来对函数组件进行处理，并将ref通过函数组件的第二个参数进行传入
-const Child = React.forwardRef(function Child(props, ref) {
+// 将ref通过函数组件的第二个参数进行传入
+const Child = function Child(props, ref) {
   return (
     <div>
       子组件
       <button ref={ref}>Submit</button>
     </div>
   );
-});
+};
+
+// 使用React.forwardRef来对函数组件进行处理
+export default React.forwardRef(Child);
 
 // 在函数组件上进行ref设置
 <Child ref={(x) => (this.box = x)} />;
