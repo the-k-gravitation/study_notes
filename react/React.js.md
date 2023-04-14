@@ -163,7 +163,7 @@ console.log(this.box); // 通过this.box即可获取 button元素
 
 语法：
 
-```jsx
+```jsx {.line-numbers}
 setState([partialState], [callback]);
 // 或者
 setState((prevState) => {
@@ -176,3 +176,49 @@ setState((prevState) => {
 ## 合成事件 Synthetic Event
 
 合成事件是围绕浏览器原生事件，充当跨浏览器包装器的对象；它们将不同浏览器的行为合并为一个 API，这样做是为了确保事件在不同浏览器中显示一致的属性。
+
+```jsx {.line-numbers}
+import React from 'react';
+
+class Demo extends React.Component {
+  handle1() {
+    // 未进行bind处理，此时的this为undefined
+    console.log(this);
+  }
+
+  handle2(x, event) {
+    // event 为合成事件：SyntheticBaseEvent
+    // 通过bind进行处理的函数，可以通过在函数最后添加一个参数（event）来获取事件对象
+    console.log(this, x, event);
+  }
+
+  // 推荐使用箭头函数
+  // event为合成事件对象
+  handle3 = (event) => {
+    console.log(this, event);
+  };
+
+  // 绑定箭头函数并带传参的方式
+  handle4 = (x, event) => {
+    console.log(this, x, event);
+  };
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.handle1}>Button1</button>
+        <button onClick={this.handle2.bind(this, 10)}>Button2</button>
+        <button onClick={this.handle3}>Button4</button>
+        <button
+          onClick={(event) => {
+            this.handle4(20, event);
+          }}>
+          箭头函数带参数的方式
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Demo;
+```
