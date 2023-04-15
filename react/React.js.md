@@ -213,7 +213,7 @@ class Demo extends React.Component {
           onClick={(event) => {
             this.handle4(20, event);
           }}>
-          箭头函数带参数的方式
+          箭头函数带参数的方式!!!
         </button>
       </div>
     );
