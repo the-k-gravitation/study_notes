@@ -15,9 +15,36 @@
 - `普通对象` 不支持渲染
 - `数组` 对象：把数组的每一项都分别拿出来渲染，并不是变为字符串渲染，各项之间没有逗号
 
-## [函数组件](./函数组件.md)
+## [函数组件](./)
 
-![函数组件](./函数组件.md)
+函数组件属于“静态”组件，即函数组件第一次渲染完毕后，组件的 View，不会随组件中的数据的变化而更新，即视图不会再更新了。
+
+函数组件不具备状态、生命周期函数、`ref` 等内容。
+
+```jsx {.line-numbers}
+import React from 'react';
+
+const FunctionComponent = function FunctionComponent() {
+  let num = 0;
+  return (
+    <div>
+      {num}
+      <br />
+      <button
+        onClick={() => {
+          num++;
+          console.log(num); // 变量值会增加，但组件视图不会更新渲染
+        }}>
+        增加
+      </button>
+    </div>
+  );
+};
+
+export default FunctionComponent;
+```
+
+在函数组件中使用 `Hooks函数` （即 `Hooks` 组件），也可以对函数组件的视图进行更新。
 
 ## 类组件
 
