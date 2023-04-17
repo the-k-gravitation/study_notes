@@ -90,6 +90,8 @@ class Parent extends React.Component {
 
 ## Hooks 组件
 
+Hooks 只能运用到函数组件中。
+
 ## 受控组件
 
 ## 非受控组件
