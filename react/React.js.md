@@ -90,7 +90,102 @@ class Parent extends React.Component {
 
 ## Hooks 组件
 
-Hooks 只能运用到函数组件中。
+Hooks 只能运用到函数组件中，它就是将函数组件动态化。它本身就是函数组件。
+
+### 基础 Hook
+
+- `useState` 使用状态管理
+- `useEffect` 使用周期函数
+- `useContext` 使用上下文信息
+
+#### useState
+
+作用：在函数组件中使用状态，修改状态值可以让函数组件更新，类似于类组件中的 `setState` 。
+
+基本语法：
+
+```jsx {.line-numbers}
+// state 状态的值
+// setState 用于修改状态的方法
+// initialState 初始的状态值
+const [state, setState] = useState(initialState);
+```
+
+```jsx {.line-numbers}
+import { useState } from 'react';
+
+const Demo = function () {
+  let [num, setNum] = useState(0);
+
+  const handle = () => {
+    setNum(num + 10);
+  };
+
+  return (
+    <div>
+      <span>{num}</span>
+      <button onClick={handle}>Button</button>
+    </div>
+  );
+};
+
+export default Demo;
+```
+
+`useState` 中的 `setState` 函数也是异步处理的。
+
+```jsx {.line-numbers}
+import React, { useState } from 'react';
+
+const Demo = function () {
+  // 当点button时 虽然分别对xyz进行了修改，但3次修改只执行了一次Demo函数，异步处理
+  console.log('render.....');
+
+  let [x, setX] = useState(0);
+  let [y, setY] = useState(0);
+  let [z, setZ] = useState(0);
+
+  const handle = () => {
+    setX(x + 1);
+    setY(y + 1);
+    setZ(z + 1);
+  };
+
+  return (
+    <div>
+      <span>x: {x}</span>
+      <span>y: {y}</span>
+      <span>z: {z}</span>
+      <button onClick={handle}>Button</button>
+    </div>
+  );
+};
+
+export default Demo;
+```
+
+如果想让每次修改都更新视图，则可以通过 `react-dom` 中的 `flushSync` 函数来强制进行同步更新。
+
+```jsx {.line-numbers}
+import { flushSync } from 'react-dom';
+
+// 此时当更新x，y时，会强制更新一次视图
+flushSync(() => {
+  setX(x + 1);
+  setY(y + 1);
+});
+// 更新z也会再更新一次视图
+setZ(z + 1);
+```
+
+### 额外 Hook
+
+- `useReducer` `useState` 的替代方案，借鉴 `redux` 处理思想，管理更复杂的状态和逻辑
+- `useCallback` 构建缓存优化方案
+- `useMemo` 构建缓存优化方案
+- `useRef` 使用 `ref` 获取 `DOM`
+- `useImperativeHandle` 配合 `forwardRef`(`ref` 转发)一起使用
+- `useLayoutEffect` 与 `useEffect` 相同，但会在所有的 DOM 变更之后同步调用 `effect` 。
 
 ## 受控组件
 
