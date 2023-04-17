@@ -186,13 +186,14 @@ import { flushSync } from 'react-dom';
 import { Button } from 'antd';
 
 const Demo = () => {
+  console.log('first');
   let [x, setX] = useState(10);
 
   const handle = () => {
     for (let i = 0; i < 10; i++) {
-      // 虽然 使用了flushSync函数，但是由于箭头函数都是指向它所在的实例对象或者函数，所以，第一次handle之后x=11,并且更新了视图，但10次的setX(x+1)都只会指向创建时的Demo函数，而并不是更新之后的。所以每次都是x=11，此时，Hooks函数会有类似于PureComponent的功能，当更新的值都是一样时，就不会去更新视图
       flushSync(() => {
         setX(x + 1);
+        //不会更新10次视图
       });
     }
   };
