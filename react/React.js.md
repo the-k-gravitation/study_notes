@@ -227,15 +227,15 @@ const handle = () => {
 
 `useEffect` 可以在函数组件中，使用生命周期函数。
 
-useEffect 几种使用方式：
+`useEffect` 几种使用方式：
 
 1. `useEffect(callback)`: 没设置依赖。
 
-   - 第一次渲染完毕后，执行 callback，类似于 componentDidMount
-   - 在组件每一次更新完毕后，也会执行 callback，类似于 componentDidUpdate
+   - 第一次渲染完毕后，执行 `callback` ，类似于 `componentDidMount`
+   - 在组件每一次更新完毕后，也会执行 `callback` ，类似于 `componentDidUpdate`
 
 2. `useEffect(callback, [])`：设置了，但是无任何依赖
-   - 只有第一次渲染完毕后，才会执行 callback，类似于 componentDidMount
+   - 只有第一次渲染完毕后，才会执行 `callback` ，类似于 `componentDidMount`
 
 ```jsx {.line-numbers}
 useEffect(() => {
@@ -244,13 +244,25 @@ useEffect(() => {
 ```
 
 3. `useEffect(callback, [count])` 监听某个（或多个）状态的变化
-   - 第一次渲染完毕会执行 callback
-   - 当监听的状态发生变化时，也会触发 callback
+   - 第一次渲染完毕会执行 `callback`
+   - 当监听的状态发生变化时，也会触发 `callback`
 
 ```jsx {.line-numbers}
 useEffect(() => {
   // 监听 count 状态的变化
 }, [count]);
+```
+
+4. 执行清理操作，在组件卸载时执行清理操作，可以从 `effect` 函数中返回一个函数。这个函数将在组件卸载时执行。
+
+```jsx {.line-numbers}
+useEffect(() => {
+  // 执行操作
+
+  return () => {
+    // 执行清理操作
+  };
+});
 ```
 
 ### 额外 Hook
@@ -261,6 +273,14 @@ useEffect(() => {
 - `useRef` 使用 `ref` 获取 `DOM`
 - `useImperativeHandle` 配合 `forwardRef`(`ref` 转发)一起使用
 - `useLayoutEffect` 与 `useEffect` 相同，但会在所有的 DOM 变更之后同步调用 `effect` 。
+
+#### useLayoutEffect
+
+`useLayoutEffect` 类似于 `useEffect，但是它会在` DOM 更新之后同步执行，而不是异步执行。
+
+与 `useEffect` 不同的是， `useLayoutEffect` 的执行时机是在 `DOM` 更新之后同步执行的。这意味着，如果在 `useLayoutEffect` 中修改了 `DOM` ，用户将会看到更新后的 `DOM`，而不是更新前的 `DOM`。
+
+由于 `useLayoutEffect` 是同步执行的，因此它可能会阻塞浏览器渲染。如果操作非常耗时，可能会导致页面卡顿。因此，建议仅在必要时使用 `useLayoutEffect`，并尽量避免在其中执行耗时操作。
 
 ## 受控组件
 
