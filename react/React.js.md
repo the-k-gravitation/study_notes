@@ -86,6 +86,8 @@ class Parent extends React.Component {
 }
 ```
 
+#### setState
+
 ### 生命周期
 
 ## Hooks 组件
@@ -194,6 +196,7 @@ const Demo = () => {
       flushSync(() => {
         setX(x + 1);
         //不会更新10次视图
+        // 并且10次之后的x=11
       });
     }
   };
@@ -207,6 +210,17 @@ const Demo = () => {
 };
 
 export default Demo;
+```
+
+```jsx {.line-numbers}
+const handle = () => {
+  for (let i = 0; i < 10; i++) {
+    // 传入一个函数，则会让x每次都能加1
+    setX((prev) => {
+      return prev + 1;
+    });
+  }
+};
 ```
 
 ### 额外 Hook
