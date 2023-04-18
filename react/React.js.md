@@ -223,6 +223,36 @@ const handle = () => {
 };
 ```
 
+#### useEffect
+
+`useEffect` 可以在函数组件中，使用生命周期函数。
+
+useEffect 几种使用方式：
+
+1. `useEffect(callback)`: 没设置依赖。
+
+   - 第一次渲染完毕后，执行 callback，类似于 componentDidMount
+   - 在组件每一次更新完毕后，也会执行 callback，类似于 componentDidUpdate
+
+2. `useEffect(callback, [])`：设置了，但是无任何依赖
+   - 只有第一次渲染完毕后，才会执行 callback，类似于 componentDidMount
+
+```jsx {.line-numbers}
+useEffect(() => {
+  // 执行一次性操作
+}, []);
+```
+
+3. `useEffect(callback, [count])` 监听某个（或多个）状态的变化
+   - 第一次渲染完毕会执行 callback
+   - 当监听的状态发生变化时，也会触发 callback
+
+```jsx {.line-numbers}
+useEffect(() => {
+  // 监听 count 状态的变化
+}, [count]);
+```
+
 ### 额外 Hook
 
 - `useReducer` `useState` 的替代方案，借鉴 `redux` 处理思想，管理更复杂的状态和逻辑
