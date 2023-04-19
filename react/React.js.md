@@ -284,6 +284,45 @@ useEffect(() => {
 
 #### useRef
 
+`useRef` 能在函数组件中创建一个 `ref` 对象。
+
+```jsx {.line-numbers}
+import React, { useState, useRef } from 'react';
+import { Button } from 'antd';
+
+const Demo = () => {
+  console.log('first');
+  let [x, setX] = useState(0);
+
+  const box = useRef(null);
+
+  const handle = () => {
+    setX(x + 1);
+  };
+
+  useEffect(() => {
+    console.log(box.current);
+  }, []);
+
+  return (
+    <div className="demo">
+      <span className="num" ref={box}>
+        x: {x}
+      </span>
+      <Button type="primary" size="small" onClick={handle}>
+        Button
+      </Button>
+    </div>
+  );
+};
+
+export default Demo;
+```
+
+#### useImperativeHandle
+
+使用 `useImperativeHandle` 和 `useRef` 可以在子的函数组件中暴露一些属性、状态或方法给父组件。
+
 ## 受控组件
 
 ## 非受控组件
