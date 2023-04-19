@@ -257,10 +257,10 @@ useEffect(() => {
 
 ```jsx {.line-numbers}
 useEffect(() => {
-  // 执行操作
+  // 执行操作。
 
   return () => {
-    // 执行清理操作
+    // 执行清理操作。
   };
 });
 ```
