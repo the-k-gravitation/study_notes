@@ -323,6 +323,56 @@ export default Demo;
 
 使用 `useImperativeHandle` 和 `useRef` 可以在子的函数组件中暴露一些属性、状态或方法给父组件。
 
+````jsx {.line-numbers}
+import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
+
+// 函数组件需要使用React.forwardRef转发ref
+const Child = React.forwardRef((props, ref) => {
+  let [text, setText] = useState('Hello');
+
+  const f = () => {};
+
+  useImperativeHandle(ref, () => {
+    // 返回的对象，会被父组件中传来的ref对象获取到
+    return {
+      // 将子组件中的状态值和方法暴露给父组件
+      text,
+      f,
+    };
+  });
+
+  return (
+    <div>
+      <span>子的函数组件</span>
+    </div>
+  );
+});
+
+const Demo = () => {
+  console.log('first');
+  let [x, setX] = useState(0);
+
+  const box = useRef(null);
+
+  useEffect(() => {
+    // 此时就会获取到函数子组件中的 useImperativeHandle 返回的对象
+    console.log(box.current);
+  }, []);
+
+  const handle = () => {
+    setX(x + 1);
+  };
+
+  return (
+    <div className="demo">
+      <Child ref={box} />
+    </div>
+  );
+};
+
+export default Demo;
+```
+
 ## 受控组件
 
 ## 非受控组件
@@ -340,7 +390,7 @@ export default Demo;
 
 // 然后就可以直接能this.box来访问获取的DOM元素
 console.log(this.box);
-```
+````
 
 - 在元素上将 `ref` 属性设置成一个“名字”【已经被 deprecated，不推荐使用】：
 
