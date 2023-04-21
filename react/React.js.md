@@ -307,6 +307,12 @@ export default VoteFooter;
 - `useImperativeHandle` 配合 `forwardRef`(`ref` 转发)一起使用
 - `useLayoutEffect` 与 `useEffect` 相同，但会在所有的 DOM 变更之后同步调用 `effect` 。
 
+#### useReducer
+
+#### useCallback
+
+#### useMemo
+
 #### useLayoutEffect
 
 `useLayoutEffect` 类似于 `useEffect，但是它会在` DOM 更新之后同步执行，而不是异步执行。
