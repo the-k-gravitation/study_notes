@@ -355,7 +355,8 @@ const Demo = () => {
   const box = useRef(null);
 
   useEffect(() => {
-    // 此时就会获取到函数子组件中的 useImperativeHandle 返回的对象
+    // 此时就会获取到函数子组件中的
+    // useImperativeHandle 返回的对象
     console.log(box.current);
   }, []);
 
