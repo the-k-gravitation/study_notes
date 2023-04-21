@@ -267,6 +267,37 @@ useEffect(() => {
 
 #### useContext
 
+通过 `useContext` 可以在函数组件中，很容易就能获取创建的 `Context` 上下文中的数据。
+
+```jsx {.line-numbers}
+import React, { useContext } from 'react';
+import ThemeContext from '../ThemeContext';
+
+const VoteFooter = () => {
+  // 通过useContext获取ThemeContext上下文的数据
+  let { change } = useContext(ThemeContext);
+
+  return (
+    <div className="footer">
+      <button
+        onClick={() => {
+          change('sup');
+        }}>
+        支持
+      </button>
+      <button
+        onClick={() => {
+          change('opp');
+        }}>
+        反对
+      </button>
+    </div>
+  );
+};
+
+export default VoteFooter;
+```
+
 ### 额外 Hook
 
 - `useReducer` `useState` 的替代方案，借鉴 `redux` 处理思想，管理更复杂的状态和逻辑
