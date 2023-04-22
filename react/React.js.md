@@ -549,3 +549,5 @@ export default Demo;
 ## createContext
 
 ## Redux & React-Redux
+
+`Redux` 就 `Javascript` 应用的状态容器，提供可预测的状态管理。
