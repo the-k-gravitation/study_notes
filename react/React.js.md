@@ -1,6 +1,7 @@
 一个 React 项目中，默认会安装：
 
 - react： React 框架的核心
+- 
 - react-dom： React 视图渲染的核心【基于 React 构建 WebApp（HTML 页面）】
 - react-scripts： 脚手架为了让项目目录看起来干净一些，把 webpack 打包的规则以及想着的插件、Loader 等都隐藏到了 node_modules 目录下，它就是脚手架中自己对打包命令的一种封装，基于它打包，会调用 node_modules 中的 webpack 等进行处理。
 - react-native： 用于构建和渲染 App
