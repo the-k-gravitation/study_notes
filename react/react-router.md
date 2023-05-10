@@ -22,3 +22,11 @@
 6. NavLink
 
 7. Switch
+
+### 几个重要的内置对象和函数
+
+1. history 对象
+
+2. match 对象
+
+3. withRouter 对象
