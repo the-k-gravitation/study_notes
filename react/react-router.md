@@ -21,6 +21,8 @@
 
 6. NavLink
 
+NavLink 可以实现路由链接的高亮，可以通过 activeClassName 来指定“高亮”的样式名，
+
 7. Switch
 
 ### 几个重要的内置对象和函数
@@ -66,3 +68,27 @@
 1. `params`
 2. `path`
 3. `url`
+
+### 向路由组件传递参数
+
+1. params 参数
+
+   - 路由链接中携带参数：
+
+   ```jsx
+   <Link to={`/user/detail/${user.id}`}>用户信息</Link>
+   ```
+
+   - 注册路由中声明接收参数：
+
+   ```jsx
+   <Route path="/user/detail/:id" component={UserDetail} />
+   ```
+
+   - 路由组件中接收参数：
+
+   ```jsx
+   const { id } = this.props.match.params;
+   ```
+
+2. search 参数
