@@ -11,7 +11,15 @@
 
 1. BrowserRouter
 
+   `BrowserBouter` 使用的是 `H5` 中的 `history API`，不兼容 `IE9` 及以下版本。
+   `BrowserBouter` 的路径中没有”#“。
+   刷新后对路由 `state` 参数没有任何影响。
+
 2. HashRouter
+
+   `HashRouter` 使用的是 URL 的哈希值。
+   `BrowserBouter` 的路径中**包含**”#“。
+   刷新后,可能会导致路由 `state` 参数丢失。
 
 3. Route
 
