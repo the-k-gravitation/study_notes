@@ -71,7 +71,7 @@ NavLink 可以实现路由链接的高亮，可以通过 activeClassName 来指�
 
 ### 向路由组件传递参数
 
-1. params 参数
+1. `params` 参数
 
    - 路由链接中携带参数：
 
@@ -86,10 +86,63 @@ NavLink 可以实现路由链接的高亮，可以通过 activeClassName 来指�
      ```
 
    - 路由组件中接收参数：
-     在路由组件中的 props 属性中的 match 属性中会有传递过来的参数，并以对象的形式存储在其中。
+     在路由组件中的 `props` 属性中的 `match` 属性中会有传递过来的参数，并以对象的形式存储在其中。
 
      ```jsx
      const { id } = this.props.match.params;
      ```
 
-2. search 参数
+2. `search` 参数
+
+   - 路由链接中通过在“?”号后面携带参数：
+
+     ```jsx
+     <Link to={`/user/detail?id=${user.id}`}>用户信息</Link>
+     ```
+
+   - 注册路由中无需声明接收参数
+
+     ```jsx
+     <Route path="/user/detail" component={UserDetail} />
+     ```
+
+   - 路由组件中接收参数：
+     在路由组件中的 `props` 属性中的 `location` 属性中的 `search` 属性会有传递过来的参数，如：“?id=001&name=abc”
+
+     ```jsx
+     // 借助querystring库进行解析
+     import qs from 'querystring';
+
+     const { search } = this.props.location;
+     // 需要将第一个字符“？”号去掉才能进行解析，qs.parse 解析之后，以对象的形式返回
+     const { id } = qs.parse(search.slice(1));
+     ```
+
+3. `state` 参数
+
+- 路由链接：
+
+  ```jsx
+  <Link
+    to={{
+      pathname: '/user/detail',
+      state: { id: '01' },
+    }}>
+    用户信息
+  </Link>
+  ```
+
+- 注册路由中无需声明接收参数
+
+  ```jsx
+  <Route path="/user/detail" component={UserDetail} />
+  ```
+
+- 路由组件中接收参数：
+  在路由组件中的 `props` 属性中的 `location` 属性中的 `state` 属性会有传递过来的参数，并以对象的形式存储在其中。
+
+  ```jsx
+  const { id } = this.props.location.state;
+  ```
+
+**注意**：由于不在 path 中传递参数，如果清空浏览器缓存，则会没法取到 state 参数。
