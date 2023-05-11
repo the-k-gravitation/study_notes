@@ -21,7 +21,7 @@
 
 6. NavLink
 
-NavLink 可以实现路由链接的高亮，可以通过 activeClassName 来指定“高亮”的样式名，
+   `NavLink` 可以实现路由链接的高亮，可以通过 activeClassName 来指定“高亮”的样式名，
 
 7. Switch
 
@@ -31,7 +31,17 @@ NavLink 可以实现路由链接的高亮，可以通过 activeClassName 来指�
 
 2. match 对象
 
-3. withRouter 对象
+3. withRouter 函数
+
+`withRouter` 可以让一般组件拥有路由组件中的`history`, `location`, `match`。
+
+```jsx
+import { withRouter } from 'react-router-dom';
+
+class Demo extends Component {}
+
+export default withRouter(Demo);
+```
 
 ### 路由组件与一般组件
 
