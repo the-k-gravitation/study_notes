@@ -75,20 +75,21 @@ NavLink 可以实现路由链接的高亮，可以通过 activeClassName 来指�
 
    - 路由链接中携带参数：
 
-   ```jsx
-   <Link to={`/user/detail/${user.id}`}>用户信息</Link>
-   ```
+     ```jsx
+     <Link to={`/user/detail/${user.id}`}>用户信息</Link>
+     ```
 
    - 注册路由中声明接收参数：
 
-   ```jsx
-   <Route path="/user/detail/:id" component={UserDetail} />
-   ```
+     ```jsx
+     <Route path="/user/detail/:id" component={UserDetail} />
+     ```
 
    - 路由组件中接收参数：
+     在路由组件中的 props 属性中的 match 属性中会有传递过来的参数，并以对象的形式存储在其中。
 
-   ```jsx
-   const { id } = this.props.match.params;
-   ```
+     ```jsx
+     const { id } = this.props.match.params;
+     ```
 
 2. search 参数
