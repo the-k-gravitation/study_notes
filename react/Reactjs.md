@@ -90,6 +90,24 @@ class Parent extends React.Component {
 
 ### 生命周期
 
+### Lazyload
+
+可以通过 `react` 提供的 `lazy` 函数，实现路由组件的懒加载。
+
+```jsx
+import { lazy, Suspense } from 'react';
+
+// 使用lazy函数进行懒加载组件
+const Demo = lazy(() => import('./Demo'));
+
+// 必须对有懒加载的路由使用Suspense进行包括
+<Suspense fallback={<h1>Loading...</h1>}>
+  <Switch>
+    <Route path="/demo" component={Demo} />
+  </Switch>
+</Suspense>;
+```
+
 ## Hooks 组件
 
 Hooks 只能运用到函数组件中，它就是将函数组件动态化。它本身就是函数组件。
