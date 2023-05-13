@@ -496,6 +496,17 @@ setState((prevState) => {
 
 如果提供了 `callback` 回调函数，则它会在 `componentDidUpdate` 之后执行，或者当 `shouldComponentUpdate` 返回了 `false` 时，它也会执行。
 
+setState 还可以传递一个函数：
+
+```jsx
+setState(
+  (state, props) => {
+    // 在此处的函数中，可以接收到 state和props
+  },
+  [callback]
+);
+```
+
 ## 合成事件 Synthetic Event
 
 合成事件是围绕浏览器原生事件，充当跨浏览器包装器的对象；它们将不同浏览器的行为合并为一个 API，这样做是为了确保事件在不同浏览器中显示一致的属性。
@@ -599,4 +610,3 @@ export default Demo;
      ...
    })
    ```
-
