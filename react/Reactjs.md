@@ -583,7 +583,47 @@ class Demo extends React.Component {
 export default Demo;
 ```
 
-## createContext
+## Context
+
+一种组件间通信方式，常用于【祖组件】与【后代组件】之间的通信。
+`Context` 在应用开发中一般不使用，一般都是用它来封装 `react` 插件。
+
+使用步骤：
+
+1. 创建 Context 容器对象：
+
+   ```jsx
+   const DemoContext = React.createContext();
+   ```
+
+2. 渲染子组件时，外面使用 DemoContext.Provider 进行包裹，通过 value 属性给后代组件传递数据：
+
+   ```jsx
+   <DemoContext.Provider value={{ a: 1, b: 2 }}>
+     <子组件 />
+   </DemoContext.Provider>
+   ```
+
+3. 后代组件读取数据：
+
+   ```jsx
+   // 第一种方式（仅适用于类组件）
+   static contextType = DemoContext;
+
+    // this.context 就是value中的值
+   console.log(this.context);
+
+
+   // 第二种方式：函数组件与类组件都可以
+   <DemoContext.Consumer>
+    {
+      // value 就是context中的value数据
+      value = (
+        // 要显示的内容
+      )
+    }
+   </DemoContext.Consumer>
+   ```
 
 ## Redux & React-Redux
 
