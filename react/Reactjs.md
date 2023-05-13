@@ -676,3 +676,17 @@ export default Demo;
      ...
    })
    ```
+
+## 组件通信方式
+
+组件间的通信方式有如下几种方式：
+
+1. props
+   - children props
+   - render props
+2. 消息订阅-发布
+   pubs-sub 等库
+3. 集中式管理
+   redux、dva、mobx 等
+4. Context
+   生产者-消费者模式
