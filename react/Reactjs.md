@@ -241,6 +241,14 @@ const handle = () => {
 };
 ```
 
+useState 也可以传入一个函数，函数的参数为原本的状态：
+
+```jsx
+let [x, setX] = useState(0);
+
+setX((preX) => preX + 1);
+```
+
 #### useEffect
 
 `useEffect` 可以在函数组件中，使用生命周期函数。
