@@ -61,6 +61,69 @@
 2. `align-self` 控制子项自己在侧轴的排列方式
 3. `order` 定义子项的排列顺序
 
+## Grid 布局
+
+`Grid` 布局将容器划分成“行”和“列”，产生单元格，可以看作是“二维布局”。
+
+### 容器 Container
+
+## 容器上的常用属性：
+
+1. **grid-template-columns** 用来设置 Grid 的列数
+   **grid-template-rows** 用来设置 Grid 的行数
+
+```css
+.container {
+  /* 表示创建grid为3列，每列的宽度为100px */
+  grid-template-columns: 100px 100px 100px;
+  /* 与上面的效果是一样的 */
+  /* repeat的第1个参数表示要重复多少次，第2个参数表示要重复的值 */
+  grid-template-columns: repeat(3, 100px);
+
+  /* 单元格大小是固定的100px，auto-full表示会根据父容器的大小再进行自动填充，即列数不定 */
+  grid-template-columns: repeat(auto-fill, 100px);
+
+  /* fr(fraction)表示比例关系
+  1fr 2fr 3fr 表示将容器的宽度等分成6分，第1列占一份，第2列占二份，第3列占三份 */
+  grid-template-columns: 1fr 2fr 3fr;
+
+  /* 3列，并等分宽度 */
+  grid-template-columns: repeat(3, 1fr);
+
+  /* minmax(最小值，最大值 ) */
+  grid-template-columns: 1fr minmax(150px, 1fr);
+
+  /* auto表示由浏览器决定大小 */
+  /* 此处因为两边都为1fr，此时中间的大小就只会包含其内容的大小，两边会平分宽度 */
+  grid-template-columns: 1fr auto 1fr;
+  /* 此处因为两边都为固定宽度，此时中间的大小即为容器剩余的所有宽度 */
+  grid-template-columns: 100px auto 100px;
+
+  /* c1-c4, r1-r5表示grid中行、列的边框线 */
+  grid-template-columns: [c1] 100px [c2] 100px [c3] 100px [c4];
+  grid-template-rows: [r1] 100px [r2] 100px [r3] 100px [r4] 100px [r5];
+}
+```
+
+2. `grid-row-gap` \ `grid-column-gap` \ `grid-gap` 行、列之间的间隙
+
+```css
+.container {
+  /* 行间距为10px */
+  grid-row-gap: 10px;
+
+  /* 列间距为10px */
+  grid-column-gap: 10px;
+
+  /* 行、列间距都为10px */
+  grid-gap: 10px;
+}
+```
+
+3. abc
+
+### 项目 Items
+
 ---
 
 CSS 包含 3 种基本的布局模型：
