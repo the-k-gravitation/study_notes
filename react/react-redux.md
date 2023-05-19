@@ -2,6 +2,8 @@
 
 `React-Redux` 主要用来集中管理 `react` 应用中多个组件 **共享** 的状态。
 
+![redux](imgs/redux.png)
+
 ### Redux 的三个核心概念
 
 #### Action

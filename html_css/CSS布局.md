@@ -65,9 +65,11 @@
 
 `Grid` 布局将容器划分成“行”和“列”，产生单元格，可以看作是“二维布局”。
 
+![grid](imgs/grid.jpg)
+
 ### 容器 Container
 
-## 容器上的常用属性：
+## Container 上的常用属性：
 
 1. **grid-template-columns** 用来设置 Grid 的列数
    **grid-template-rows** 用来设置 Grid 的行数
@@ -123,9 +125,58 @@
    }
    ```
 
-3. abc
+3. `grid-auto-flow` 子元素的排放顺序
 
-### 项目 Items
+   ```css
+   <!-- 默认的子元素排放顺序，先行后列 -->
+   grid-auto-flow: row;
+
+    <!-- 子元素 先列后行 进行排放 -->
+   grid-auto-flow: column;
+   ```
+
+4. `justify-items` 设置子元素 **水平方向** 上的对齐方式
+   `align-items` 设置子元素 **垂直方向** 上的对齐方式
+   `place-items` 上面两者的组合表示方式
+
+   ```css
+   justify-items: start | end | center | stretch;
+   align-items: start | end | center | stretch;
+
+   place-items: <align-items> <justify-items>;
+   ```
+
+5. `justify-content`、`align-content` 设置**整个内容区域**在 `Grid` 中的水平和垂直方向上的对齐方式
+
+   ```css
+   justify-content: start | end | center | stretch | space-around |
+     space-between | space-evenly;
+
+   align-content: start | end | center | stretch | space-around | space-between
+     | space-evenly;
+   ```
+
+6. `grid-auto-columns`、`grid-auto-rows` 用来设置多出来的项目的 宽和高
+
+```css
+grid-auto-columns: 50px;
+
+grid-auto-rows: 40px;
+```
+
+### 项目
+
+Items 上的常用属性：
+
+1. `justify-self` 设置单元格内容的 水平位置
+   `align-self` 设置单元格内容的 垂直位置
+   `place-self` 二者的简写
+
+   ```css
+   justify-self: start | end | center | stretch;
+   align-self: start | end | center | stretch;
+   place-self: <align-self> <justify-self>;
+   ```
 
 ---
 
