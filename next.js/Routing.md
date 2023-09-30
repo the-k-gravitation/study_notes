@@ -42,3 +42,4 @@ A `layout.js` and `page.js` file can be defined in the same folder. The layo
 
 ## Template
 #template
+when a user navigates between routes that share a template, a new instance of the component is mounted, DOM elements are recreated, state is **not** preserved, and effects are re-synchronized.
