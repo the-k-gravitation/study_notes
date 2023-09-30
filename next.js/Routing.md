@@ -43,3 +43,9 @@ A `layout.js` and `page.js` file can be defined in the same folder. The layo
 ## Template
 #template
 when a user navigates between routes that share a template, a new instance of the component is mounted, DOM elements are recreated, state is **not** preserved, and effects are re-synchronized.
+
+以下情况更适合使用 `template`:
+- Features that rely on `useEffect` (e.g logging page views) and `useState` (e.g a per-page feedback form).
+- To change the default framework behavior. For example, Suspense Boundaries inside layouts only show the fallback the first time the Layout is loaded and not when switching pages. For templates, the fallback is shown on each navigation.
+
+In terms of nesting, `template.js` is rendered between a layout and its children.
