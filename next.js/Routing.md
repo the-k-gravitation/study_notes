@@ -1,7 +1,7 @@
 #nextjs #route
 ## 基于 app 文件夹的路由规则：
 
-默认下，在 *app* 下的 **components** 为 **React Server Components** .
+默认下，在 `app` 下的 `components` 为 `React Server Components` .
 Next.js uses a file-system based router: 
 - Folders are used to define routes. 
 - 文件夹下面的 "page.js" 文件为 默认的 Route File.
@@ -22,3 +22,12 @@ File 名约定：
 
 only the contents returned by `page.js` or `route.js` are publicly addressable。
 
+A `layout.js` and `page.js` file can be defined in the same folder. The layout will wrap the page.
+
+### Root Layout (Required)
+
+- The `app` directory **must** include a root layout
+- The root layout is a [Server Component](https://nextjs.org/docs/app/building-your-application/rendering/server-components) by default and **can not** be set to a [Client Component](https://nextjs.org/docs/app/building-your-application/rendering/client-components).
+- The root layout must define `<html>` and `<body>` tags since Next.js does not automatically create them.
+- Only the root layout can contain `<html>` and `<body>` tags.
+- 
