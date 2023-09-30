@@ -1,5 +1,5 @@
 #nextjs #route
-## 基于 app 文件夹的路由规则：
+## 基于 app 的路由规则：
 
 默认下，在 `app` 下的 `components` 为 `React Server Components` .
 Next.js uses a file-system based router: 
@@ -22,7 +22,15 @@ File 名约定：
 
 only the contents returned by `page.js` or `route.js` are publicly addressable。
 
+## Layouts
+#layout
+
 A `layout.js` and `page.js` file can be defined in the same folder. The layout will wrap the page.
+
+- Layouts are [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) by default but can be set to a [Client Component](https://nextjs.org/docs/app/building-your-application/rendering/client-components).
+- Passing data between a parent layout and its children is not possible.
+- Can use [Route Groups](https://nextjs.org/docs/app/building-your-application/routing/route-groups) to opt specific route segments in and out of shared layouts.
+- Layouts do not have access to the route segments below itself. To access all route segments, can use [`useSelectedLayoutSegment`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segment) or [`useSelectedLayoutSegments`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments) in a Client Component
 
 ### Root Layout (Required)
 
@@ -30,4 +38,7 @@ A `layout.js` and `page.js` file can be defined in the same folder. The layo
 - The root layout is a [Server Component](https://nextjs.org/docs/app/building-your-application/rendering/server-components) by default and **can not** be set to a [Client Component](https://nextjs.org/docs/app/building-your-application/rendering/client-components).
 - The root layout must define `<html>` and `<body>` tags since Next.js does not automatically create them.
 - Only the root layout can contain `<html>` and `<body>` tags.
-- 
+
+
+## Template
+#template
