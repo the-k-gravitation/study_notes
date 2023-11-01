@@ -66,7 +66,7 @@ let bag = {
 ```js {.line-numbers}
 let fruit = 'Apple';
 let bag = {
-	[`{fruit}_count`] = 5;
+	[`${fruit}_count`] = 5;
 }
 ```
 
