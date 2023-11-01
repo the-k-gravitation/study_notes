@@ -277,7 +277,7 @@ let usersMapped = users.map((user) => ({
 ```js {.line-numbers}
 let result = arr.reduce(function (accumulator, item, index, array) {
   // 代码块
-});
+}, initial);
 ```
 
 - `accumulator` —— 是上一个函数调用的结果，第一次等于  `initial`（如果提供了  `initial`  的话）。
