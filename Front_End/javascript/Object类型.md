@@ -598,8 +598,8 @@ console.log(user + 2); // hint: default --> 20
 
 有两种类型的对象属性：
 
-- 第一种是  **数据属性**。
-- 第二种是  **访问器属性（accessor property）**。它们本质上是用于获取和设置值的函数，但从外部代码来看就像常规属性。
+- 第 1 种是  <font color='red'>数据属性</font>。
+- 第 2 种是  <font color='red'>访问器属性（accessor property）</font>。它们本质上是用于获取和设置值的函数，但从外部代码来看就像常规属性。
 
 访问器属性由 “getter” 和 “setter” 方法表示。
 
