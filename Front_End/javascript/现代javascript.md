@@ -35,9 +35,15 @@
 
 ## [条件语句](./条件语句.md)
 
+![条件语句](./条件语句.md)
+
 ## [循环语句](./循环语句.md)
 
+![循环语句](./循环语句.md)
+
 ## [函数 Function](./函数Function.md)
+
+![函数 Function](./函数Function.md)
 
 ## [Class](./class类.md) 
 
