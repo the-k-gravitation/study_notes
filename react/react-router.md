@@ -18,7 +18,7 @@
 2. HashRouter
 
    `HashRouter` 使用的是 URL 的哈希值。
-   `BrowserBouter` 的路径中**包含**”#“。
+   `HashRouter` 的路径中**包含**”#“。
    刷新后,可能会导致路由 `state` 参数丢失。
 
 3. Route
