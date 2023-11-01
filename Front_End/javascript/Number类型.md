@@ -109,7 +109,7 @@ let n = (12345664554).toString(36); // 注意使用两个点
 - toFixed(n)
 
 `toFixed(n)` 将数字舍入到小数点后 `n` 位，并以 `字符串` 的形式返回。
-`toFixed(n)` 会将数字舍入到最接近的值， 类似于 `Math.round` 。
+`toFixed(n)` 会将数字舍入到最接近的值， 类似于 `Math.round()` 。
 如果 `n` 比数字所有的小数位还多，则结尾会添加零。
 
 ```js {.line-numbers}
