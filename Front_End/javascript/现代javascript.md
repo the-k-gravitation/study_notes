@@ -11,6 +11,7 @@
 ![alert、prompt 和 confirm](./alert、prompt和confirm.md)
 
 ## [数据类型](./数据类型.md)
+![数据类型](./数据类型.md)
 
 ## [数组 Array](./数组Array.md)
 
