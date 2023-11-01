@@ -101,7 +101,7 @@ const id2 = Symbol.for('id'); // 由于已经在 全局 Symbol 注册表 中已�
 console.log(id == id2); // true
 ```
 
-可以使用 `Sysmbol.keyFor(symbol)` 通过 symbol 对象返回其标签名字：
+可以使用 `Symbol.keyFor(symbol)` 通过 symbol 对象返回其标签名字：
 
 ```js {.line-numbers}
 let s1 = Symbol.for('symbol1');
