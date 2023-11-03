@@ -69,7 +69,7 @@
 
 ### 容器 Container
 
-## Container 上的常用属性：
+## Container 上的常用属性
 
 1. **grid-template-columns** 用来设置 Grid 的列数
    **grid-template-rows** 用来设置 Grid 的行数
@@ -182,7 +182,7 @@ Items 上的常用属性：
 
 CSS 包含 3 种基本的布局模型：
 
-## 流动模型 Flow , HTML 网页的默认布局模式 。
+## 流动模型 Flow , HTML 网页的默认布局模式
 
 特征：
 
@@ -302,9 +302,9 @@ CSS 包含 3 种基本的布局模型：
 
    3. 设置`position:relative` 和
 
-`left:50%`,通过给父元素设置*float*,然后给父元素设置`position:relative
-`和`left:50% `,子元素设置`position:relative `和`left:-50% `来实现水平居中。 5.
-垂直居中— 父元素高度确定的单行文本 ， 通过设置父元素的* height*和 _ line-height_
+`left:50%`,通过给父元素设置_float_,然后给父元素设置`position:relative
+`和`left:50%`,子元素设置`position:relative`和`left:-50%`来实现水平居中。 5.
+垂直居中— 父元素高度确定的单行文本 ， 通过设置父元素的_height_和 _line-height_
 高度一致来实现。
 
 ```html
@@ -386,7 +386,7 @@ css code:
 </style>
 ```
 
-8.  隐性改变 display 类型
+8. 隐性改变 display 类型
     > 当为元素（不论之前是什么类型元素，display:none 除外）设置以下 2 个句之一：
         1. position : absolute
         2. float : left 或 float:right

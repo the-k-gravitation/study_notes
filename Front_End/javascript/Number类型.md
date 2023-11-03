@@ -1,4 +1,4 @@
-#datatype #number
+ #datatype #number
 
 `number`类型代表**整数**和**浮点数**。
 
@@ -163,7 +163,7 @@ sum = +sum.toFixed(2);
 
 ## isNaN(value) 与 isFinite(value)
 
-`isNaN(value)` 用来测试 `value` 是否为 `NaN`： 
+`isNaN(value)` 用来测试 `value` 是否为 `NaN`：
 
 ```js {.line-numbers}
 console.log(isNaN(NaN)); // true
@@ -193,12 +193,12 @@ n = isFinite(n);
 
 ## ===  与 Object.is
 
-除了以下两种情况下， `===` 与 `Object.is` 完全一样： 
+除了以下两种情况下， `===` 与 `Object.is` 完全一样：
+
 1. `Object.is(NaN , NaN) === true`
 2. `Object.is(0, -0) === false`， 在内部，数字的符号位可能会不同，即使其他所有位均为零。
 
 当内部算法需要比较两个值是否完全相同时，它使用 `Object.is`（内部称为 [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)）。
-
 
 ## 数字型转换
 
@@ -281,17 +281,20 @@ console.log(parseInt('2n3cr', 36)); // 4436667
 
 需要将区间 0…1 中的所有值“映射”为范围在 `min` 到 `max` 中的值。
 分两个阶段完成：
+
 1. 如果我们将 0…1 的随机数乘以 `max-min`，则随机数的范围将从 0…1 增加到 `0..max-min`。
 2. 现在，如果我们将随机数与 `min` 相加，则随机数的范围将为 `min` 到 `max`。
-3. 
+3.
+
 ```js {.line-numbers}
 function random(min, max) { 
-	return min + Math.random() * (max - min); 
+ return min + Math.random() * (max - min); 
 }
 ```
 
 ### 从 min 到 max 的随机整数
-#解题
+
+# 解题
 
 创建一个函数 `randomInteger(min, max)`，该函数会生成一个范围在 `min` 到 `max` 中的随机整数，包括 `min` 和 `max`。
 在 `min..max` 范围中的所有数字的出现概率必须相同。
@@ -303,8 +306,8 @@ function random(min, max) {
 ```js {.line-numbers}
 // 但不正确。获得边缘值 `min` 和 `max` 的概率比其他值低两倍。
 function randomInteger(min, max) {
-	let rand = min + Math.random() * (max - min); 
-	return Math.round(rand); 
+ let rand = min + Math.random() * (max - min); 
+ return Math.round(rand); 
 }
 
 randomInteger(1, 3);
@@ -322,9 +325,9 @@ values from 2.5 ... 2.9999999999 ---> 3   (0.5)
 
 ```js {.line-numbers}
 function randomInteger(min, max) { 
-	// 现在范围是从 (min-0.5) 到 (max+0.5) 
-	let rand = min - 0.5 + Math.random() * (max - min + 1); 
-	return Math.round(rand); 
+ // 现在范围是从 (min-0.5) 到 (max+0.5) 
+ let rand = min - 0.5 + Math.random() * (max - min + 1); 
+ return Math.round(rand); 
 }
 ```
 
@@ -332,9 +335,8 @@ function randomInteger(min, max) {
 
 ```js {.line-numbers}
 function randomInteger(min, max) { 
-	// here rand is from min to (max+1) 
-	let rand = min + Math.random() * (max + 1 - min); 
-	return Math.floor(rand); 
+ // here rand is from min to (max+1) 
+ let rand = min + Math.random() * (max + 1 - min); 
+ return Math.floor(rand); 
 }
 ```
-

@@ -1,4 +1,4 @@
-#json #javascript
+ #json #javascript
 
 JSON 支持 object，array，string，number，boolean 和  `null`。
 

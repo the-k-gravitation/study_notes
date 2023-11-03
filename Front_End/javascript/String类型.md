@@ -1,4 +1,4 @@
-#datatype #string
+ #datatype #string
 
 在 javascript 中， 字符串是不可更改的。
 有 3 种表示字符串的方式：

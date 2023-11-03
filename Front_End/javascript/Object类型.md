@@ -1,4 +1,4 @@
-#javascript #datatype #object
+ #javascript #datatype #object
 
 `object` 类型用于储存数据集合和更为复杂的数据实体。
 通过带有可选 **属性列表** 的 **花括号{...}** 来创建对象。 一个属性就是一个键值对（key:value），其中键 key 是一个字符串（属性名），值 value 可以是任何值。
@@ -51,7 +51,7 @@ user.education = 'Undergraduate';
 
 ## 计算属性
 
-#计算属性
+ #计算属性
 
 可以通过计算属性来实现，对象的属性名从变量中动态确定。
 
@@ -59,14 +59,14 @@ user.education = 'Undergraduate';
 let fruit = prompt('买的哪种水果？'， "Apple");
 
 let bag = {
-	[fruit] = 5; // 属性名是动态读取的
+ [fruit] = 5; // 属性名是动态读取的
 }
 ```
 
 ```js {.line-numbers}
 let fruit = 'Apple';
 let bag = {
-	[`${fruit}_count`] = 5;
+ [`${fruit}_count`] = 5;
 }
 ```
 
@@ -100,7 +100,7 @@ let user = {
 
 ```js {.line-numbers}
 let obj = {
-	12: 'Number'
+ 12: 'Number'
 };
 
 console.log(obj["12"]); // Number
@@ -200,7 +200,7 @@ for (let key in user) {
 
 ## 对象的克隆与合并（浅复制）
 
-#浅拷贝
+ #浅拷贝
 
 对于一个对象变量，它存储的并不是”对象的值“，而是一个对值的”引用“（内存地址）。 因此，**拷贝类变量或者将其作为函数参数传递时，所拷贝的是引用，而不是对象本身**。
 
@@ -331,7 +331,7 @@ console.log(user2);
 
 ## 深拷贝
 
-#深拷贝 #lodash
+ #深拷贝 #lodash
 
 可以 使用 `lodash` 库的 `_.cloneDeep(obj)` 来实现 ”深拷贝“：
 
@@ -369,7 +369,7 @@ let user = {
 
 ## this
 
-#this
+ #this
 
 ### 方法中的 ”this“
 
@@ -381,7 +381,7 @@ user.say(); // 此时，say()中的this就是前面的user对象。
 
 ### "this" 不受限制
 
-javascript 中的 `this` 可以用于任何函数，即使它不是对象的方法。 `this` 的值是在代码运行时 **_计算出来_** 的，它取决于代码上下文。
+javascript 中的 `this` 可以用于任何函数，即使它不是对象的方法。 `this` 的值是在代码运行时 ***计算出来*** 的，它取决于代码上下文。
 在 JavaScript 中，`this`  是“自由”的，它的值是在调用时计算出来的，它的值并不取决于方法声明的位置，而是取决于在“点符号前”的是什么对象。
 
 ```js {.line-numbers}
@@ -405,7 +405,7 @@ obj2.b(); // Jack , 此时的this指向obj2
 
 ## 构造函数
 
-#构造函数 #new
+ #构造函数 #new
 
 构造函数 也是常规函数，只是对于它有 2 个共同的约定：
 
@@ -467,15 +467,15 @@ User(); // 没有使用 new 来执行
 
 ## 可选链 "?."
 
-#可选链 #polyfills
+ #可选链 #polyfills
 
 可选链 `?.` 是一种访问嵌套对象属性的安全方式。它是最近才添加到 javascript 中的特性，旧式浏览器可能需要 `polyfills` 。
 
-- 如果 _可选链_ `?.` 前面的值为 `undefined` 或者 `null` ， 它会停止运算并返回 `undefined` 。
-- _可选链_ `?.` 是针对其前面的值成为可选值，对其后面的值不起作用。
-- _可选链_ `?.` 可以用来安全地读取或者删除，但不能用于写入。
+- 如果 *可选链* `?.` 前面的值为 `undefined` 或者 `null` ， 它会停止运算并返回 `undefined` 。
+- *可选链* `?.` 是针对其前面的值成为可选值，对其后面的值不起作用。
+- *可选链* `?.` 可以用来安全地读取或者删除，但不能用于写入。
 
-_可选链_ `?.` 语法的 3 种形式：
+*可选链* `?.` 语法的 3 种形式：
 
 - `obj?.prop` -- 如果 `obj` 存在则返回 `obj.prop` ， 否则返回 `undefined`
 - `obj?.[prop]` -- 如果 `obj` 存在则返回 `obj[prop]`， 否则返回 `undefined`
@@ -534,8 +534,8 @@ alert(user); // hint: string --> {name: "Tom"}
 
 /*
 {
-	"name": "Tom",
-	"age": 18
+ "name": "Tom",
+ "age": 18
 }
 */
 console.log(user);
@@ -558,8 +558,8 @@ alert(user); // hint: string --> {name: "Tom"}
 
 /*
 {
-	"name": "Tom",
-	"age": 18
+ "name": "Tom",
+ "age": 18
 }
 */
 console.log(user);
@@ -582,8 +582,8 @@ alert(user); // hint: string --> [object Object]
 
 /*
 {
-	"name": "Tom",
-	"age": 18
+ "name": "Tom",
+ "age": 18
 }
 */
 console.log(user);
@@ -661,7 +661,7 @@ for (let prop in rabbit) {
 }
 ```
 
-## 所有的内建对象都遵循相同的模式（pattern）：
+## 所有的内建对象都遵循相同的模式（pattern）
 
 - 方法都存储在 prototype 中（`Array.prototype`、`Object.prototype`、`Date.prototype`  等）。
 - 对象本身只存储数据（数组元素、对象属性、日期）。

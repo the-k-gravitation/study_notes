@@ -1,4 +1,4 @@
-#datatype #symbol
+ #datatype #symbol
 
 ## 创建 Symbol 类型
 
