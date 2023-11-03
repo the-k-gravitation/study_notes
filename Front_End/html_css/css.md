@@ -545,12 +545,21 @@ transform: translate(50%, 150%);
 - 取值正负均可
 - 正：顺时，负：逆时
 
+#### scale 缩放
+
+属性： `transform: scale(缩放倍数)；`， `transform: scale(x轴缩放倍数, y轴缩放倍数);`
+
+#### skew 倾斜
+
+属性： `transform: skew(角度度数deg);`
+
 #### 多重转换
 
 注意：
 
 1. 旋转会改变坐标轴向
 2. 多重转换时，以排在第一种转换形态的坐标轴为准
+3. 要实现多重转换，必须得使用 transform 来进行组合。
 
 ```css
 .box:hover img {
@@ -564,6 +573,31 @@ transform: translate(50%, 150%);
   transform:rotate(360deg) translate(600px) ;
 }
 ```
+
+## 渐变
+
+### 线性渐变
+
+属性：
+
+```css
+background-image: linear-gradient(
+  渐变方向,
+  颜色1 终点位置,
+  颜色2 终点位置,
+  ...
+);
+```
+
+取值：
+
+- 渐变方向(可选)：
+  1. to 方位名词
+  2. 角度度数
+- 终点位置(可选)：
+  百分比
+
+### 径向渐变
 
 ## SEO
 
