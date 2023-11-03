@@ -599,6 +599,22 @@ background-image: linear-gradient(
 
 ### 径向渐变
 
+属性：
+
+```css
+background-image: radial-gradient(
+  半径 at 圆心位置,
+  颜色1 终点位置,
+  颜色2 终点位置,
+  ...
+);
+```
+
+取值：
+
+- 半径可以是 2条，如果为2个半径，则为椭圆。
+- 圆心位置： 像素单位\百分比\方位名词。
+
 ## SEO
 
 ### SEO 三大标签
