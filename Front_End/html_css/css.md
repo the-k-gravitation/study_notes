@@ -545,6 +545,26 @@ transform: translate(50%, 150%);
 - 取值正负均可
 - 正：顺时，负：逆时
 
+#### 多重转换
+
+注意：
+
+1. 旋转会改变坐标轴向
+2. 多重转换时，以排在第一种转换形态的坐标轴为准
+
+```css
+.box:hover img {
+
+  /* 下面两个会得到完全不同的转换效果 */
+
+  /* 此时，会以translate的坐标轴为准，即水平移动的同时还进行了旋转 */
+  transform:translate(600px) rotate(360deg);
+
+  /* 此时，会以rotate的坐标轴为准， 即旋转的同时还进行水平移动 */
+  transform:rotate(360deg) translate(600px) ;
+}
+```
+
 ## SEO
 
 ### SEO 三大标签

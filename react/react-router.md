@@ -69,11 +69,11 @@ export default withRouter(Demo);
 
 **history** 中的重要方法：
 
-1.  `function go(n)`
-2.  `function goBack()`
-3.  `function goForward()`
-4.  `function push(path, state)`
-5.  `function replace(path, state)`
+1. `function go(n)`
+2. `function goBack()`
+3. `function goForward()`
+4. `function push(path, state)`
+5. `function replace(path, state)`
 
 **location** 中的重要属性：
 
