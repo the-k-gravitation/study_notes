@@ -736,12 +736,21 @@ background-image: radial-gradient(
 
 媒体查询能够检测视口的宽度
 
+属性：
+
 ```css
 @media (媒体特性) {
   选择器 {
     CSS 属性
   }
 }
+
+@media 关键词 媒体类型 and (媒体特性) {
+  CSS 属性
+}
+/* 关键词： and, only, not */
+/* 媒体类型： screen, print, speech, all */
+/* 媒体特性： width, height, max-width, max-height, min-width, min-height, orientation(portrait|landscape) */
 ```
 
 ```css
@@ -754,6 +763,17 @@ background-image: radial-gradient(
 @media (min-width: 320px) {
   /* ... */
 }
+```
+
+外部媒体查询CSS文件：
+
+```html
+<!-- 这样就可以根据条件来加载CSS文件 -->
+<!-- 逻辑符 媒体类型 and  可以根据条件省略，但小括号必须有 -->
+<link rel="stylesheet" media="逻辑符 媒体类型 and (媒体特性)" href="外部CSS.css">
+
+<!-- 如： -->
+<link rel="stylesheet" media="(min-width:768px)" href="外部CSS.css">
 ```
 
 ### rem
