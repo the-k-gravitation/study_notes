@@ -494,6 +494,33 @@ css精灵，也叫 `CSS Sprites`, 是一种网页图片应用处理方式，把�
 
 ## 动画
 
+### animation 动画
+
+- 动画：实现`多个状态`间的变化过程， 动画过程可控（重复播放、最终画质、是否暂停）
+- 过渡：实现`两个状态`间的变化过程。
+
+属性：
+
+```css
+animation: 动画名称 动画时长 速度曲线 延迟时间 重复次数 动画方向 执行完毕时状态;
+```
+
+#### 定义动画
+
+```css
+@keyframes 动画名称{
+  from {}
+  to {}
+}
+
+@keyframes 动画名称{
+  0% {}
+  10% {}
+  ...
+  100% {}
+}
+```
+
 ### transition 过渡效果
 
 作用： 可以为一个元素在不同状态之间切换的时候添加过渡效果
@@ -572,6 +599,78 @@ transform: translate(50%, 150%);
   /* 此时，会以rotate的坐标轴为准， 即旋转的同时还进行水平移动 */
   transform:rotate(360deg) translate(600px) ;
 }
+```
+
+### 空间转换 (3D)
+
+#### perspective 视距
+
+作用：指定观察者与 `Z=0` 平面的距离，为元素添加透视效果。
+
+透视效果： `近大远小，近实远虚`。
+
+属性： `perspective: 视距`。
+
+`perspective` 必须添加到直接父级上，否则不会生效， 取值范围一般为`800-1200`。
+
+#### translate3d(x,y,z) 平移
+
+属性：
+
+```css
+/* x,y，z必须都同时提供数值，要不然，效果不会生效 */
+transform: translate(x,y,z);
+
+transform: translateX();
+transform: translateY();
+transform: translateZ();
+```
+
+取值：
+
+- 正负均可
+- 像素单位数值
+- 百分比（参照盒子自身尺寸）
+
+在默认情况下，无法观察到Z轴的变换效果。需要添加perspective 属性。
+
+#### rotate 旋转
+
+属性：
+
+```css
+transform: rotateX();
+transform: rotateY();
+transform: rotateZ();
+/* 用来自定义旋转轴的位置 */
+transform: rotate3d(x,y,z, 角度度数);
+```
+
+#### transform-style 立体呈现
+
+作用： 设置元素的子元素是位于3D空间中还是平面中。
+设置在父元素上。
+
+属性值：
+
+- flat: 子级处于平面中。
+- preserve-3d： 子级处于3d空间中。
+
+呈现立体图形步骤：
+
+1. 给`直接父元素`添加 `transform-style: preserve-3d`;
+2. 子级定位
+3. 调整子盒子的位置（位移或旋转）
+
+#### scale3d 缩放
+
+属性：
+
+```css
+transform: scale3d(x,y,z);
+transform: scaleX();
+transform: scaleY();
+transform: scaleZ();
 ```
 
 ## 渐变
