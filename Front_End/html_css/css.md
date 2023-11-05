@@ -754,6 +754,19 @@ background-image: radial-gradient(
 
 `flexible.js` 是手淘开发出的一个用来适配移动端的js库。其`核心原理`就是根据不同的视口宽度给网页中的 html根节点设置不同的 `font-size`
 
+### vw
+
+基本概念：
+
+- 相对单位
+- 相对视口的尺寸计算结果
+- vw: viewport width
+  `1vw = 1/100 视口宽度` ，即 1vw 等于1%的视口宽度
+- vh: viewport height
+  `1vh = 1/100 视口高度` ，即 1vh 等于1%的视口高度
+
+在开发中，不要 `vw` 和 `vh` 混用。
+
 ## 开发技巧
 
 ### 网站的 Logo 制作
