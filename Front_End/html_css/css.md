@@ -759,7 +759,7 @@ background-image: radial-gradient(
   /* ... */
 }
 
-/* 大于等于 320px */
+/* 大于等于 320px  */
 @media (min-width: 320px) {
   /* ... */
 }
