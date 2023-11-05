@@ -722,6 +722,8 @@ background-image: radial-gradient(
 - `description`: 网页描述
 - `keywords`: 网页关键词
 
+## 适配
+
 ## 开发技巧
 
 ### 网站的 Logo 制作
