@@ -732,6 +732,18 @@ background-image: radial-gradient(
    - rem
    - vw
 
+### 媒体查询
+
+媒体查询能够检测视口的宽度
+
+```css
+@media (媒体特性) {
+  选择器 {
+    CSS 属性
+  }
+}
+```
+
 ### rem
 
 基本概念：
@@ -739,6 +751,8 @@ background-image: radial-gradient(
 - rem单位是 `相对单位`
 - rem单位是相对于`HTML标签的字号(根字号)`的计算结果
 - 1rem = 1HTML字号大小
+
+`flexible.js` 是手淘开发出的一个用来适配移动端的js库。其`核心原理`就是根据不同的视口宽度给网页中的 html根节点设置不同的 `font-size`
 
 ## 开发技巧
 
