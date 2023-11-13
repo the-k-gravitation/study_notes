@@ -360,19 +360,19 @@ var search = function (nums, target) {
   let left = 0
   let right = nums.length - 1
   // let mid = Math.floor(left + (right - left) / 2)
-
-  while (true) {
-    if (left <= right) {
-      let mid = Math.floor(left + (right - left) / 2)
-      if (nums[mid] === target) return mid
-      else if (nums[mid] < target) {
-        left = mid + 1
-      } else {
-        right = mid - 1
-      }
+ 
+    // 注意要进行此处的判断为先
+  while (left <= right) {
+    // left + (right - left) / 2 是为了处理最大值溢出的问题
+    let mid = Math.floor(left + (right - left) / 2)
+    if (nums[mid] === target) return mid
+    else if (nums[mid] < target) {
+      left = mid + 1
     } else {
-      return -1
+      right = mid - 1
     }
+  } 
+    return -1
   }
 }
 
