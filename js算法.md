@@ -193,6 +193,7 @@ selection([5, 3, 7, 2, 1, 9, 8, 4])
 进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？
 
 ```java
+//java
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> hashtable = new HashMap<Integer, Integer>();
@@ -209,6 +210,7 @@ class Solution {
 ```
 
 ```javascript
+//javascript
 /**
  * @param {number[]} nums
  * @param {number} target
@@ -248,6 +250,7 @@ var twoSum = function(nums, target) {
 s 和 t 仅包含小写字母
 
 ```java
+// java
 class Solution {
     public boolean isAnagram(String s, String t) {
         if( s.length() != t.length()){
@@ -264,6 +267,7 @@ class Solution {
 ```
 
 ```javascript
+// javascript
 /**
  * @param {string} s
  * @param {string} t
@@ -277,4 +281,24 @@ var isAnagram = function(s, t) {
     // return str1 === str2;
     s.length == t.length && [...s].sort().join('') === [...t].sort().join('')
 };
+```
+
+```javascript
+// javascript
+// 如果输入字符串包含 unicode 字符
+var isAnagram2 = function (s, t) {
+  if (s.length !== t.length) return false
+  let table = new Map()
+  for (let ch of s) {
+    table.set(ch, (table.get(ch) || 0) + 1)
+    console.log(ch, table.get(ch))
+  }
+
+  for (let ch of t) {
+    table.set(ch, (table.get(ch) || 0) - 1)
+    if (table.get(ch) < 0) return false
+  }
+
+  return true 
+}
 ```
