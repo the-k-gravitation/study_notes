@@ -270,10 +270,11 @@ class Solution {
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    if(s.length !== t.length) return false;
+    // if(s.length !== t.length) return false;
 
-    let str1 = [...s].sort().toString(); 
-    let str2 = [...t].sort().toString();
-    return str1 === str2;
+    // let str1 = [...s].sort().toString(); 
+    // let str2 = [...t].sort().toString();
+    // return str1 === str2;
+    s.length == t.length && [...s].sort().join('') === [...t].sort().join('')
 };
 ```
