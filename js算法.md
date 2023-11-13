@@ -202,6 +202,7 @@ class Solution {
             if(hashtable.containsKey(index)){
                 return new int[]{i, hashtable.get(index)};
             }
+            // 将 原来的 nums 的 索引 和 值，反过来存入到 hashtable中
             hashtable.put(nums[i], i);
         }
         return new int[0];
@@ -229,7 +230,7 @@ var twoSum = function(nums, target) {
 };
 ```
 
-### 2. 有效的字母异位词
+### 242. 有效的字母异位词
 
 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
 
@@ -301,4 +302,39 @@ var isAnagram2 = function (s, t) {
 
   return true 
 }
+```
+
+### 56.合并区间
+
+以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。
+
+示例 1：
+
+输入：intervals = [[1,3],[2,6],[8,10],[15,18]]
+输出：[[1,6],[8,10],[15,18]]
+解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+示例 2：
+
+输入：intervals = [[1,4],[4,5]]
+输出：[[1,5]]
+解释：区间 [1,4] 和 [4,5] 可被视为重叠区间。
+
+```javascript
+// javascript
+var merge = function(intervals) {
+  // 先按数组每项的第一位进行排序
+  intervals.sort((a,b) => a[0] - b[0])
+
+  let res = []
+  for(let i=0;i<intervals.length;i++){
+    let curr = intervals[i]
+    // 当为第1个时或者，当前项的第1位已经大于 res 中的最后项中的第2位时，表示已经不连续，直接将当前 curr 添加到 res中
+    if(res.length ===0 || res[res.length-1][1] < curr[0]){
+        res.push(curr)
+    }else{
+        res[res.length -1][1] = Math.max(curr[1], res[res.length -1][1])
+    }
+  }
+  return res
+};
 ```
