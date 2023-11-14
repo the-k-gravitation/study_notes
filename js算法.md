@@ -654,6 +654,129 @@ var isAnagram2 = function (s, t) {
 }
 ```
 
+### 20.有效的括号
+
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
+
+有效字符串需满足：
+
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+每个右括号都有一个对应的相同类型的左括号。
+
+示例 1：
+
+输入：s = "()"
+输出：true
+示例 2：
+
+输入：s = "()[]{}"
+输出：true
+示例 3：
+
+输入：s = "(]"
+输出：false
+
+提示：
+
+1 <= s.length <= 104
+s 仅由括号 '()[]{}' 组成
+
+```javascript
+// javascript
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function (s) {
+  const mappings = new Map()
+
+  mappings.set('(', ')')
+  mappings.set('[', ']')
+  mappings.set('{', '}')
+
+  const stack = []
+  for (const c of s) {
+    if (mappings.has(c)) {
+      stack.push(mappings.get(c))
+    } else {
+      if (stack.pop() !== c) {
+        return false
+      }
+    }
+  }
+
+  if (stack.length !== 0) return false
+  return true
+}
+
+```
+
+### 21.合并两个有序链表
+
+将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+
+示例 1：
+
+输入：l1 = [1,2,4], l2 = [1,3,4]
+输出：[1,1,2,3,4,4]
+示例 2：
+
+输入：l1 = [], l2 = []
+输出：[]
+示例 3：
+
+输入：l1 = [], l2 = [0]
+输出：[0]
+
+提示：
+
+两个链表的节点数目范围是 [0, 50]
+-100 <= Node.val <= 100
+l1 和 l2 均按 非递减顺序 排列
+
+```javascript
+// javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} list1
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(list1, list2) {
+    let curr = new ListNode()
+    let dummy = curr
+    
+    while(list1 !== null & list2 !== null){
+        if(list1.val < list2.val){
+            curr.next = list1
+            list1 = list1.next
+        }
+        else {
+            curr.next = list2
+            list2= list2.next
+        }
+        curr = curr.next
+    }
+
+    if(list1 !== null){
+        curr.next = list1
+    }
+    if(list2 !== null){
+        curr.next=list2
+    }
+
+    return dummy.next
+
+};
+```
+
 ### 56.合并区间
 
 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。
