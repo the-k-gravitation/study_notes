@@ -399,6 +399,42 @@ var lengthOfLongestSubstring = function (s) {
 1 <= s.length <= 1000
 s 仅由数字和英文字母组成
 
+```javascript
+//javascript
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function (s) {
+  if (s.length < 2) return s
+
+  let start = 0
+  let maxLength = 1
+
+  function expandAroundCenter(left, right) {
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+      let len = right - left + 1
+      if (len > maxLength) {
+        maxLength = len
+        start = left
+      }
+      left--
+      right++
+    }
+  }
+
+  for (let i = 0; i < s.length; i++) {
+    // 处理i右侧不与自己相同的
+    expandAroundCenter(i - 1, i + 1)
+    // 处理i右侧与自己相同的条件
+    expandAroundCenter(i, i + 1)
+  }
+
+  return s.substring(start, start + maxLength)
+}
+
+```
+
 ### 242. 有效的字母异位词
 
 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
