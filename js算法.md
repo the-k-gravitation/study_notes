@@ -435,6 +435,151 @@ var longestPalindrome = function (s) {
 
 ```
 
+### 15.三数之和
+
+给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请
+
+你返回所有和为 0 且不重复的三元组。
+
+注意：答案中不可以包含重复的三元组。
+
+示例 1：
+
+输入：nums = [-1,0,1,2,-1,-4]
+输出：[[-1,-1,2],[-1,0,1]]
+解释：
+nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。
+nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。
+nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
+不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。
+注意，输出的顺序和三元组的顺序并不重要。
+示例 2：
+
+输入：nums = [0,1,1]
+输出：[]
+解释：唯一可能的三元组和不为 0 。
+示例 3：
+
+输入：nums = [0,0,0]
+输出：[[0,0,0]]
+解释：唯一可能的三元组和为 0 。
+
+提示：
+
+3 <= nums.length <= 3000
+-105 <= nums[i] <= 105
+
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ * 关键在于去重的处理
+ */
+var threeSum = function (nums) {
+  const result = []
+  // 给数组进行排序
+  nums.sort((a, b) => a - b)
+  // 遍历数组，从0遍历到length-2
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    //当i与其i-1前一个数值不相等时，才进行处理，如果相同则跳过，进行再一数
+    if (i === 0 || nums[i] !== nums[i - 1]) {
+      let start = i + 1
+      let end = nums.length - 1
+
+      while (start < end) {
+        if (nums[i] + nums[start] + nums[end] === 0) {
+          result.push([nums[i], nums[start], nums[end]])
+          // 去重，如果start右侧的数值与其相同，则再往右跳
+          while (start < end && nums[start] === nums[start + 1]) start++
+          // 去重，如果end左侧的数值与其相同，则再往左跳
+          while (start < end && nums[end] === nums[end - 1]) end--
+          start++
+          end--
+        } else if (nums[i] + nums[start] + nums[end] < 0) {
+          // 让和更大
+          start++
+        } else {
+          // 让和更小
+          end--
+        }
+      }
+    }
+  }
+
+  return result
+}
+
+console.log(threeSum((nums = [-1, 0, 1, 2, -1, -4])))
+
+```
+
+### 19.删除链表的倒数第N个结点
+
+给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+
+示例 1：
+
+输入：head = [1,2,3,4,5], n = 2
+输出：[1,2,3,5]
+示例 2：
+
+输入：head = [1], n = 1
+输出：[]
+示例 3：
+
+输入：head = [1,2], n = 1
+输出：[1]
+
+提示：
+
+链表中结点的数目为 sz
+1 <= sz <= 30
+0 <= Node.val <= 100
+1 <= n <= sz
+
+进阶：你能尝试使用一趟扫描实现吗？
+
+```javascript
+//javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ * 主要思想就是让两个指针保持固定的距离，从链表的开始往后一步一步进行走，
+ * 直到第2个指针自己或者其next为null时，就可以利用第1个指针的next来进行删除操作
+ */
+var removeNthFromEnd = function (head, n) {
+  // 创建一个头部ListNode
+  let dummy = new ListNode()
+  dummy.next = head
+
+  let n1 = dummy
+  let n2 = dummy
+
+  for (let i = 0; i < n; i++) {
+    n2 = n2.next
+  }
+
+  while (n2.next !== null) {
+    n1 = n1.next
+    n2 = n2.next
+  }
+
+  n1.next = n1.next.next
+
+  return dummy.next
+}
+
+```
+
 ### 242. 有效的字母异位词
 
 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
