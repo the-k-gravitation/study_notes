@@ -777,6 +777,60 @@ var mergeTwoLists = function(list1, list2) {
 };
 ```
 
+### 24.两两交换链表中的节点
+
+给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。
+
+示例 1：
+
+输入：head = [1,2,3,4]
+输出：[2,1,4,3]
+示例 2：
+
+输入：head = []
+输出：[]
+示例 3：
+
+输入：head = [1]
+输出：[1]
+
+提示：
+
+链表中节点的数目在范围 [0, 100] 内
+0 <= Node.val <= 100
+
+```javascript
+// javascript
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var swapPairs = function(head) {
+    let dummy =new ListNode()
+    dummy.next = head
+    let curr = dummy 
+    while (curr.next !== null && curr.next.next !== null){
+        let n1 = curr.next
+        let n2 = curr.next.next
+        curr.next = n2
+        n1.next= n2.next
+        n2.next = n1
+        curr = n1
+    } 
+
+    return dummy.next
+
+};
+```
+
 ### 56.合并区间
 
 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。
