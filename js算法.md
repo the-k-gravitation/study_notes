@@ -831,6 +831,68 @@ var swapPairs = function(head) {
 };
 ```
 
+### 49.字母异位词分组
+
+给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。
+
+字母异位词 是由重新排列源单词的所有字母得到的一个新单词。
+
+示例 1:
+
+输入: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+输出: [["bat"],["nat","tan"],["ate","eat","tea"]]
+示例 2:
+
+输入: strs = [""]
+输出: [[""]]
+示例 3:
+
+输入: strs = ["a"]
+输出: [["a"]]
+
+提示：
+
+1 <= strs.length <= 104
+0 <= strs[i].length <= 100
+strs[i] 仅包含小写字母
+
+```javascript
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function (strs) {
+  if (strs.length === 0) return [['']]
+
+  const map = new Map()
+
+  for (const str of strs) {
+    const chars = Array(26).fill(0)
+    for (const ch of str) {
+      const ascii = ch.charCodeAt() - 97
+      chars[ascii]++
+    }
+    const k = chars.toString()
+    if (map.has(k)) {
+      map.set(k, [...map.get(k), str])
+    } else {
+      map.set(k, [str])
+    }
+  }
+
+  const res = []
+  for (const m of map) {
+    res.push(m[1])
+  }
+  // console.log(res)
+  return res
+}
+
+strs = ['eat', 'tea', 'tan', 'ate', 'nat', 'bat']
+groupAnagrams(strs) // out: [ [ 'eat', 'tea', 'ate' ], [ 'tan', 'nat' ], [ 'bat' ] ]
+
+```
+
 ### 56.合并区间
 
 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。
@@ -906,5 +968,3 @@ var search = function (nums, target) {
 let nums = [-1, 0, 3, 5, 9, 12]
 console.log(search(nums, 9))
 ```
-
-###
