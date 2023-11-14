@@ -160,7 +160,7 @@ selection([5, 3, 7, 2, 1, 9, 8, 4])
 
 ## LeetCode
 
-### 1. 两数之和
+### 1.两数之和
 
 <https://leetcode.cn/problems/two-sum/submissions/481845517/?envType=study-plan-v2&envId=top-100-liked>
 
@@ -228,6 +228,154 @@ var twoSum = function(nums, target) {
         hashtable.set(nums[i],i)
     }
 };
+```
+
+### 2.两数相加
+
+给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
+
+请你将两个数相加，并以相同形式返回一个表示和的链表。
+
+你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+
+示例 1：
+
+输入：l1 = [2,4,3], l2 = [5,6,4]
+输出：[7,0,8]
+解释：342 + 465 = 807.
+示例 2：
+
+输入：l1 = [0], l2 = [0]
+输出：[0]
+示例 3：
+
+输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+输出：[8,9,9,9,0,0,0,1]
+
+提示：
+
+每个链表中的节点数在范围 [1, 100] 内
+0 <= Node.val <= 9
+题目数据保证列表表示的数字不含前导零
+
+```javascript
+//javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+
+function ListNode(val, next) {
+  this.val = val === undefined ? 0 : val
+  this.next = next === undefined ? null : next
+}
+
+const l1 = new ListNode(2)
+l1.next = new ListNode(4)
+l1.next.next = new ListNode(3)
+const l2 = new ListNode(5)
+l2.next = new ListNode(6)
+l2.next.next = new ListNode(4)
+
+const l3 = addTwoNumbers(l1, l2)
+console.log(l3)
+
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+    let dummy = new ListNode();
+    let curr = dummy;
+    let carry = 0;
+
+    while(l1 !== null || l2 !== null) {
+        let sum =0;
+        if(l1!==null) {
+            sum += l1.val;
+            l1 = l1.next;
+        }
+
+        if(l2 !== null) {
+            sum += l2.val;
+            l2 = l2.next;
+        }
+
+        sum += carry;
+
+        curr.next = new ListNode(sum % 10);
+        carry = Math.floor(sum/10);
+        curr = curr.next;
+    }
+
+    if(carry>0){
+        //如果最后 carry不为零，表示最后还有进位。
+        curr.next = new ListNode(carry);
+    }
+
+    return dummy.next;
+};
+```
+
+### 3.无重复字符的最长子串
+
+给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
+
+示例 1:
+
+输入: s = "abcabcbb"
+输出: 3
+解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+示例 2:
+
+输入: s = "bbbbb"
+输出: 1
+解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+示例 3:
+
+输入: s = "pwwkew"
+输出: 3
+解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+
+提示：
+
+0 <= s.length <= 5 * 104
+s 由英文字母、数字、符号和空格组成
+
+```javascript
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+  const set = new Set()
+
+  let i = 0,
+    j = 0,
+    maxLength = 0
+
+  if (s.length === 0) return 0
+
+  for (let i = 0; i < s.length; i++) {
+    if (!set.has(s[i])) {
+      set.add(s[i])
+      maxLength = Math.max(maxLength, set.size)
+    } else {
+      while (set.has(s[i])) {
+        set.delete(s[j])
+        j++
+      }
+      set.add(s[i])
+    }
+  }
+
+  return maxLength
+}
 ```
 
 ### 242. 有效的字母异位词
@@ -379,3 +527,5 @@ var search = function (nums, target) {
 let nums = [-1, 0, 3, 5, 9, 12]
 console.log(search(nums, 9))
 ```
+
+###
