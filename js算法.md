@@ -580,80 +580,6 @@ var removeNthFromEnd = function (head, n) {
 
 ```
 
-### 242. 有效的字母异位词
-
-给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
-
-注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
-
-示例 1:
-
-输入: s = "anagram", t = "nagaram"
-输出: true
-示例 2:
-
-输入: s = "rat", t = "car"
-输出: false
-
-提示:
-
-1 <= s.length, t.length <= 5 * 104
-s 和 t 仅包含小写字母
-
-```java
-// java
-class Solution {
-    public boolean isAnagram(String s, String t) {
-        if( s.length() != t.length()){
-            return false;
-        }
-
-        char[] str1 = s.toCharArray();
-        char[] str2 = t.toCharArray();
-        Arrays.sort(str1);
-        Arrays.sort(str2);
-        return Arrays.equals(str1, str2);
-    }
-}
-```
-
-```javascript
-// javascript
-/**
- * @param {string} s
- * @param {string} t
- * @return {boolean}
- */
-var isAnagram = function(s, t) {
-    // if(s.length !== t.length) return false;
-
-    // let str1 = [...s].sort().toString(); 
-    // let str2 = [...t].sort().toString();
-    // return str1 === str2;
-    s.length == t.length && [...s].sort().join('') === [...t].sort().join('')
-};
-```
-
-```javascript
-// javascript
-// 如果输入字符串包含 unicode 字符
-var isAnagram2 = function (s, t) {
-  if (s.length !== t.length) return false
-  let table = new Map()
-  for (let ch of s) {
-    table.set(ch, (table.get(ch) || 0) + 1)
-    console.log(ch, table.get(ch))
-  }
-
-  for (let ch of t) {
-    table.set(ch, (table.get(ch) || 0) - 1)
-    if (table.get(ch) < 0) return false
-  }
-
-  return true 
-}
-```
-
 ### 20.有效的括号
 
 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
@@ -926,6 +852,81 @@ var merge = function(intervals) {
   }
   return res
 };
+```
+
+### 242. 有效的字母异位词
+
+给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+
+注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
+
+示例 1:
+
+输入: s = "anagram", t = "nagaram"
+输出: true
+示例 2:
+
+输入: s = "rat", t = "car"
+输出: false
+
+提示:
+
+1 <= s.length, t.length <= 5 * 104
+s 和 t 仅包含小写字母
+
+```java
+// java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if( s.length() != t.length()){
+            return false;
+        }
+
+        char[] str1 = s.toCharArray();
+        char[] str2 = t.toCharArray();
+        Arrays.sort(str1);
+        Arrays.sort(str2);
+        return Arrays.equals(str1, str2);
+    }
+}
+```
+
+```javascript
+// javascript
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+    // if(s.length !== t.length) return false;
+
+    // let str1 = [...s].sort().toString(); 
+    // let str2 = [...t].sort().toString();
+    // return str1 === str2;
+    s.length == t.length && [...s].sort().join('') === [...t].sort().join('')
+};
+```
+
+```javascript
+// javascript
+// 如果输入字符串包含 unicode 字符
+var isAnagram2 = function (s, t) {
+  if (s.length !== t.length) return false
+  let table = new Map()
+  for (let ch of s) {
+    table.set(ch, (table.get(ch) || 0) + 1)
+    console.log(ch, table.get(ch))
+  }
+
+  for (let ch of t) {
+    table.set(ch, (table.get(ch) || 0) - 1)
+    if (table.get(ch) < 0) return false
+  }
+
+  return true 
+}
+
 ```
 
 ### 704.二分查找
