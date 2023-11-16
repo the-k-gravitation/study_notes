@@ -970,10 +970,30 @@ var spiralOrder = function (matrix) {
 
 ```javascript
 // javascript
+
+// 从数组的后面往前进行处理，一直往前遍历到 0 位置，如果0位置上返回1，则表示可以跳跃到最后
+var canJump = function (nums) {
+  const totalLength = nums.length 
+  // curr 记录从后往前最近一个能跳跃的位置索引
+  curr = totalLength - 1
+  // 从倒数第2个位置开始往前遍历，因为最后一个位置肯定为1
+  for (let i = totalLength - 2; i >= 0; i--) {
+    // 当 当前位置索引+其值，大于等于curr时，表示当前位置能跳跃到curr
+    if (nums[i] + i >= curr) { 
+      //将 curr 设置为当前索引
+      curr = i
+    }
+  }
+  return curr === 0
+}
+```
+
+```javascript
+// javascript
 /**
  * @param {number[]} nums
  * @return {boolean}
- * 使用 递归
+ * 使用 递归 （比较复杂）
  */
 var canJump = function (nums) {
   const totalLength = nums.length
