@@ -946,6 +946,68 @@ var spiralOrder = function (matrix) {
 
 ```
 
+### 55.跳跃游戏
+
+给你一个非负整数数组 nums ，你最初位于数组的 第一个下标 。数组中的每个元素代表你在该位置可以跳跃的最大长度。
+
+判断你是否能够到达最后一个下标，如果可以，返回 true ；否则，返回 false 。
+
+示例 1：
+
+输入：nums = [2,3,1,1,4]
+输出：true
+解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。
+示例 2：
+
+输入：nums = [3,2,1,0,4]
+输出：false
+解释：无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0 ， 所以永远不可能到达最后一个下标。
+
+提示：
+
+1 <= nums.length <= 104
+0 <= nums[i] <= 105
+
+```javascript
+// javascript
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ * 使用 递归
+ */
+var canJump = function (nums) {
+  const totalLength = nums.length
+  // 1 -- 能跳，0-- 未知， -1 -- 不能跳
+  const memo = Array(totalLength).fill(0)
+  // 最后一个位置上肯定是 1
+  memo[totalLength - 1] = 1
+  function jump(position) {
+    if (memo[position] === 1) {
+      return true
+    } else if (memo[position] === -1) {
+      return false
+    }
+
+    // 最大跳跃步数
+    const maxJump = Math.min(position + nums[position], totalLength - 1)
+    for (let i = position + 1; i <= maxJump; i++) {
+      const jumpResult = jump(i)
+      if (jumpResult === true) {
+        memo[position] = 1
+        return true
+      }
+    }
+    // 当所有跳跃步数都不能达到最后时，表示不通。
+    memo[position] = -1
+    return false
+  }
+
+  let result = jump(0)
+  return result
+}
+
+```
+
 ### 56.合并区间
 
 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。
