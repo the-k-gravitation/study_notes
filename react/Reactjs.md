@@ -335,6 +335,115 @@ export default VoteFooter;
 
 #### useReducer
 
+结合 `createContext` 和 `useReducer`，可以实现在不同组件之间使用 `state` 的功能。
+
+```jsx
+import { createContext, useReducer } from "react"
+import { DUMMY_PRODUCTS } from "../dummy-products.js"
+
+export const CartContext = createContext({
+  items: [],
+  addItemToCart: id => {},
+  updateCartItemQuantity: (productId, amount) => {},
+})
+
+function shoppingCartReducer(state, action) {
+  if (action.type === "ADD_ITEM") {
+    const { id } = action
+    const updatedItems = [...state.items]
+
+    const existingCartItemIndex = updatedItems.findIndex(
+      cartItem => cartItem.id === id
+    )
+    const existingCartItem = updatedItems[existingCartItemIndex]
+
+    if (existingCartItem) {
+      const updatedItem = {
+        ...existingCartItem,
+        quantity: existingCartItem.quantity + 1,
+      }
+      updatedItems[existingCartItemIndex] = updatedItem
+    } else {
+      const product = DUMMY_PRODUCTS.find(product => product.id === id)
+      updatedItems.push({
+        id,
+        name: product.title,
+        price: product.price,
+        quantity: 1,
+      })
+    }
+
+    return {
+      ...state,
+      items: updatedItems,
+    }
+  }
+
+  if (action.type === "UPDATE_ITEM") {
+    const {
+      data: { productId, amount },
+    } = action
+    const updatedItems = [...state.items]
+    const updatedItemIndex = updatedItems.findIndex(
+      item => item.id === productId
+    )
+
+    const updatedItem = {
+      ...updatedItems[updatedItemIndex],
+    }
+
+    updatedItem.quantity += amount
+
+    if (updatedItem.quantity <= 0) {
+      updatedItems.splice(updatedItemIndex, 1)
+    } else {
+      updatedItems[updatedItemIndex] = updatedItem
+    }
+
+    return {
+      ...state,
+      items: updatedItems,
+    }
+  }
+
+  return state
+}
+
+export default function CartContextProvider({ children }) {
+  const [shoppingCartState, dispatch] = useReducer(shoppingCartReducer, {
+    items: [],
+  })
+
+  function handleAddItemToCart(id) {
+    dispatch({
+      type: "ADD_ITEM",
+      id,
+    })
+  }
+
+  function handleUpdateCartItemQuantity(productId, amount) {
+    dispatch({
+      type: "UPDATE_ITEM",
+      data: {
+        productId,
+        amount,
+      },
+    })
+  }
+
+  const ctxValue = {
+    items: shoppingCartState.items,
+    addItemToCart: handleAddItemToCart,
+    updateCartItemQuantity: handleUpdateCartItemQuantity,
+  }
+
+  return (
+    <CartContext.Provider value={ctxValue}>{children}</CartContext.Provider>
+  )
+}
+
+```
+
 #### useCallback
 
 #### useMemo
@@ -625,57 +734,9 @@ export default Demo;
    </DemoContext.Consumer>
    ```
 
-## Redux & React-Redux
+## [React-Redux](./react-redux.md)
 
-`Redux` 就 `Javascript` 应用的状态容器，提供可预测的状态管理。
-
-`Redux` 的核心概念是 `store，它是一个包含应用程序状态的对象。`
-
-`Redux` 的工作原理是通过分派操作来更新 `store` 中的状态。操作是一个描述如何更新状态的对象。当您分派一个操作时，`Redux` 将调用 `reducer` 函数来更新 `store` `中的状态。reducer` 函数接受当前状态和操作作为参数，并返回一个新状态。这个新状态将成为 `store` 中的新状态。
-
-### 使用的一般步骤
-
-1. 创建全局公共的容器，用来存储各组件需要的公共信息（公共状态和事件）：
-
-   ```jsx {.line-numbers}
-   const store = createStore([reducer]);
-   ```
-
-2. 在组件内部，获取公用状态信息，然后进行渲染。
-
-   ```jsx {.line-numbers}
-   store.getState();
-   ```
-
-3. 把“让组件可以更新”的方法放在公共容器的事件池中。
-
-   ```jsx {.line-numbers}
-   store.subscribe(函数);
-   ```
-
-4. 创建容器的时候，需要传递 reducer
-
-   ```jsx {.line-numbers}
-   let initial = {...}; //初始状态值
-   const reducer = (state=initial, action) =>{
-     // action 派发的行为对象（必须具备type属性）
-     // state 容器中的状态
-     switch(action.type){
-       //根据传递的type值，修改对应的状态信息
-     }
-     // 返回的信息会替换store容器中的公共状态
-     return state;
-   }
-   ```
-
-5. 派发任务，通过 reducer 执行修改状态
-
-   ```jsx {.line-numbers}
-   store.dispatch({
-     type: xxx,
-     ...
-   })
-   ```
+![React-Redux](./react-redux.md)
 
 ## 组件通信方式
 
